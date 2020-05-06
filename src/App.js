@@ -1,26 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Note from "./components/Note/Note";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//notes and checklists should be separate
+//sidebar to create new noteset/notespace
+//free form notes that can be linked!?
+// -auto align notes
+
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <Note/>
+            </div>
+        );
+    }
 }
 
 export default App;
