@@ -21,3 +21,13 @@
     background-color: transparent;
     border: none;
 }
+
+.Text {
+    outline: none;
+    cursor: text;
+}
+
+.Text:empty:before {
+    content: attr(data-placeholder);
+    color: grey;
+}

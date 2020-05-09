@@ -8,7 +8,7 @@ class Note extends Component {
             <div className={classes.NoteContainer}>
                 <div>toolbar: drag, link </div>
                 <input type="text" placeholder="Title" className={classes.Title}/>
-                <div contentEditable placeholder="Edit this text"/>
+                <div contentEditable className={classes.Text} data-placeholder={"Write your notes here..."}/>
             </div>
         )
     }
