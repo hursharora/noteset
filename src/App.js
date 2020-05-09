@@ -10,7 +10,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Note/>
+                <Note id={0}/>
+                <Note id={1}/>
             </div>
         );
     }
