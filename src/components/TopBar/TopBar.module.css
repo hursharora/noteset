@@ -1,15 +1,11 @@
 .TopBar {
     display: flex;
-    top: 0;
-    left: 0;
-    right: 0;
     flex-direction: row;
-    height: 5vh;
+    height: 5%;
     background: #213263;
     z-index: 500;
     align-items: center;
     justify-content: center;
-    position: fixed;
 }
 
 .TitleText {
