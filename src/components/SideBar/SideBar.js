@@ -7,10 +7,6 @@ const SideBar = props => {
             <ul>
                 <li>Noteset 1</li>
                 <li>Noteset 1</li>
-                <li>Noteset 1</li>
-                <li>Noteset 1</li>
-                <li>Noteset 1</li>
-                <li>Noteset 1</li>
             </ul>
         </div>
     );
