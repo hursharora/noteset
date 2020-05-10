@@ -1,0 +1,17 @@
+.TopBar {
+    display: flex;
+    top: 0;
+    left: 0;
+    right: 0;
+    flex-direction: row;
+    height: 5vh;
+    background: #213263;
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+}
+
+.TitleText {
+    color: #cccccc;
+}

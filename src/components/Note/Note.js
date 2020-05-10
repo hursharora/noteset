@@ -22,8 +22,16 @@ class Note extends Component {
     mouseMoveHandler = event => {
         //console.log("mousemove");
         const element = document.getElementById("note" + this.state.id);
-        element.style.left = event.pageX - this.offsetX + "px";
-        element.style.top = event.pageY - this.offsetY + "px";
+        let toSetLeft = event.pageX - this.offsetX;
+        let toSetTop = event.pageY - this.offsetY;
+        if (toSetLeft < 0) {
+            toSetLeft = 0;
+        }
+        if (toSetTop < 0) {
+            toSetTop = 0;
+        }
+        element.style.left = toSetLeft + "px";
+        element.style.top = toSetTop + "px";
     }
 
     mouseUpHandler = () => {
@@ -36,7 +44,7 @@ class Note extends Component {
         return (
             <div className={classes.NoteContainer}
                  id={"note" + this.state.id}>
-                <div onMouseDown={this.mouseDownHandler}>Click to drag</div>
+                <div className={classes.Drag} onMouseDown={this.mouseDownHandler}>Drag</div>
                 <input type="text" placeholder="Title" className={classes.Title}/>
                 <div contentEditable className={classes.Text} data-placeholder={"Write your notes here..."}/>
             </div>

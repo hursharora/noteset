@@ -1,13 +1,14 @@
 .NoteContainer {
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    width: 300px;
     padding: 16px;
     margin: 16px;
     background-color: yellow;
     border: solid 1px black;
     border-radius: 8px;
     position: absolute;
+    z-index: 0;
 }
 
 .NoteContainer:hover {
@@ -21,6 +22,13 @@
     background-color: transparent;
     border: none;
     outline: none;
+}
+
+.Drag {
+    cursor: move;
+    width: fit-content;
+    align-self: flex-end;
+    background-color: #ccc
 }
 
 .Text {
