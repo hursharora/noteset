@@ -8,12 +8,16 @@ class Note extends Component {
 
     offsetX;
     offsetY;
+    offsetRight;
+    offsetBottom;
+
 
     mouseDownHandler = event => {
         //console.log("mousedown");
         const element = document.getElementById("note" + this.state.id);
-        this.offsetX = event.clientX - element.getBoundingClientRect().left;
-        this.offsetY = event.clientY - element.getBoundingClientRect().top;
+        this.offsetX = event.clientX - element.offsetLeft;
+        this.offsetY = event.clientY - element.offsetTop;
+        this.offsetRight = event.clientX - element.parentElement.clientWidth;
 
         document.addEventListener("mousemove", this.mouseMoveHandler);
         document.addEventListener("mouseup", this.mouseUpHandler)
@@ -22,13 +26,23 @@ class Note extends Component {
     mouseMoveHandler = event => {
         //console.log("mousemove");
         const element = document.getElementById("note" + this.state.id);
-        let toSetLeft = event.pageX - this.offsetX;
-        let toSetTop = event.pageY - this.offsetY;
+        let toSetLeft = event.clientX - this.offsetX;
+        let toSetTop = event.clientY - this.offsetY;
+        //console.log(toSetLeft);
+        //console.log(element.parentElement.clientWidth - this.offsetX);
+        //console.log(element.parentElement.clientWidth - 400);
+
         if (toSetLeft < 0) {
             toSetLeft = 0;
         }
+        if (toSetLeft > element.parentElement.clientWidth - 400) {
+            toSetLeft = element.parentElement.clientWidth - 400;
+        }
         if (toSetTop < 0) {
             toSetTop = 0;
+        }
+        if (toSetTop > element.parentElement.clientHeight - 200) {
+            toSetTop = element.parentElement.clientHeight - 200;
         }
         element.style.left = toSetLeft + "px";
         element.style.top = toSetTop + "px";
