@@ -6,7 +6,7 @@ const SideBar = props => {
         <div className={classes.SideBar}>
             <ul>
                 <li>Noteset 1</li>
-                <li>Noteset 1</li>
+                <li>Noteset 2</li>
             </ul>
         </div>
     );
