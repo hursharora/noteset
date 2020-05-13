@@ -6,6 +6,7 @@ import MainContainer from "./page-containers/MainContainer/MainContainer";
 // -auto align notes
 //task: to add checkbox
 //New Note Button in topBar
+//drag note to corner for delete
 
 class App extends React.Component {
     render() {

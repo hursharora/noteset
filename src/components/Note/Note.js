@@ -8,16 +8,12 @@ class Note extends Component {
 
     offsetX;
     offsetY;
-    offsetRight;
-    offsetBottom;
-
 
     mouseDownHandler = event => {
         //console.log("mousedown");
         const element = document.getElementById("note" + this.state.id);
         this.offsetX = event.clientX - element.offsetLeft;
         this.offsetY = event.clientY - element.offsetTop;
-        this.offsetRight = event.clientX - element.parentElement.clientWidth;
 
         document.addEventListener("mousemove", this.mouseMoveHandler);
         document.addEventListener("mouseup", this.mouseUpHandler)

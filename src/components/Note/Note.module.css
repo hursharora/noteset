@@ -4,7 +4,7 @@
     width: 300px;
     padding: 16px;
     margin: 16px;
-    background-color: yellow;
+    background-color: rgb(118, 118, 48);
     border: solid 1px black;
     border-radius: 8px;
     position: absolute;
@@ -16,6 +16,7 @@
 }
 
 .Title {
+    color: white;
     margin: 8px 0;
     height: 24px;
     font-size: 20px;
@@ -24,19 +25,25 @@
     outline: none;
 }
 
+.Title::placeholder {
+    color: #acabab;
+}
+
 .Drag {
     cursor: move;
     width: fit-content;
     align-self: flex-end;
-    background-color: #ccc
+    background-color: #ccc;
+    user-select: none;
 }
 
 .Text {
+    color: white;
     outline: none;
     cursor: text;
 }
 
 .Text:empty:before {
     content: attr(data-placeholder);
-    color: grey;
+    color: #acabab;
 }
