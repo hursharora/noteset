@@ -4,8 +4,11 @@ import {connect} from "react-redux";
 import * as actions from "../../store/actions"
 
 class SideBar extends React.Component {
+
+    firstActiveId;
     componentDidMount() {
         //set state.main.activeSpaceId to id of space at position 0
+        this.props.onActiveSpaceChange(0, this.firstActiveId);
     }
 
     render() {
@@ -14,6 +17,7 @@ class SideBar extends React.Component {
                 <ul>
                     {this.props.spaces.map((sp, index) => {
                         if (sp.position === this.props.activePosition) {
+                            this.firstActiveId = sp.id;
                             return <li key={sp.id}
                                        className={classes.ActiveItem}
                                        onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>{sp.name}</li>
