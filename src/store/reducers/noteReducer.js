@@ -1,6 +1,8 @@
 const initialState = {
-    notes: [{title: "", content:""}]
+    "noteset1": [{title: "My first note", content:"my first note content", id: 3}]
 }
+
+//notespace_id: notes
 // {
 //     setID: []
 // }

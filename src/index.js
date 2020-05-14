@@ -7,10 +7,13 @@ import {createStore, combineReducers} from "redux";
 import setReducer from "./store/reducers/setReducer";
 import {Provider} from "react-redux";
 import mainReducer from "./store/reducers/mainReducer";
+import noteReducer from "./store/reducers/noteReducer";
+
 
 const rootReducer = combineReducers({
     set: setReducer,
-    main: mainReducer
+    main: mainReducer,
+    note: noteReducer
 });
 
 const store = createStore(rootReducer);

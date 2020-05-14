@@ -1,7 +1,7 @@
 import * as actions from "../actions"
 
 const initialState = {
-    spaces: [{name: "NoteSet1", id: "init_id", position: 0}],
+    spaces: [{name: "NoteSet1", id: "noteset1", position: 0}],
     spacesCount: 1
 }
 

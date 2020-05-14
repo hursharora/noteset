@@ -2,7 +2,7 @@ import * as actions from "../actions"
 
 const initialState = {
     activeSpacePosition: 0,
-    activeSpaceID: 0,
+    activeSpaceID: null,
     auth: true
 }
 

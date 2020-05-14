@@ -2,16 +2,13 @@ import React, {Component} from "react";
 import classes from "./Note.module.css"
 
 class Note extends Component {
-    state = {
-        id: this.props.id
-    }
 
     offsetX;
     offsetY;
 
     mouseDownHandler = event => {
         //console.log("mousedown");
-        const element = document.getElementById("note" + this.state.id);
+        const element = document.getElementById("note" + this.props.id);
         this.offsetX = event.clientX - element.offsetLeft;
         this.offsetY = event.clientY - element.offsetTop;
 
@@ -21,7 +18,7 @@ class Note extends Component {
 
     mouseMoveHandler = event => {
         //console.log("mousemove");
-        const element = document.getElementById("note" + this.state.id);
+        const element = document.getElementById("note" + this.props.id);
         let toSetLeft = event.clientX - this.offsetX;
         let toSetTop = event.clientY - this.offsetY;
         //console.log(toSetLeft);
@@ -53,7 +50,7 @@ class Note extends Component {
     render() {
         return (
             <div className={classes.NoteContainer}
-                 id={"note" + this.state.id}>
+                 id={"note" + this.props.id}>
                 <div className={classes.Drag} onMouseDown={this.mouseDownHandler}>Drag</div>
                 <input type="text" placeholder="Title" className={classes.Title}/>
                 <div contentEditable className={classes.Text} data-placeholder={"Write your notes here..."}/>
