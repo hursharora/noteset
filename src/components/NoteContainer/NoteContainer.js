@@ -10,7 +10,7 @@ class NoteContainer extends Component {
 
         if (this.props.activeSpaceID && currNotes !== undefined) {
             notesMapped = currNotes.map(el => (
-                <Note id={el.id}/>
+                <Note key={el.id} id={el.id} belongsTo={this.props.activeSpaceID} xPos={el.xPos} yPos={el.yPos}/>
             ))
         }
 

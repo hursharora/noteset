@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import classes from "./Note.module.css"
+import {connect} from "react-redux";
+import * as actions from "../../store/actions";
 
 class Note extends Component {
 
@@ -39,10 +41,13 @@ class Note extends Component {
         }
         element.style.left = toSetLeft + "px";
         element.style.top = toSetTop + "px";
+        //console.log(element.style.left);
     }
 
     mouseUpHandler = () => {
         //console.log("mouseup");
+        const element = document.getElementById("note" + this.props.id);
+        this.props.onUpdatePosition(element.style.left, element.style.top, this.props.belongsTo, this.props.id);
         document.removeEventListener("mousemove", this.mouseMoveHandler);
         document.removeEventListener("mouseup", this.mouseUpHandler);
     }
@@ -50,7 +55,7 @@ class Note extends Component {
     render() {
         return (
             <div className={classes.NoteContainer}
-                 id={"note" + this.props.id}>
+                 id={"note" + this.props.id} style={{left: this.props.xPos, top: this.props.yPos}}>
                 <div className={classes.Drag} onMouseDown={this.mouseDownHandler}>Drag</div>
                 <input type="text" placeholder="Title" className={classes.Title}/>
                 <div contentEditable className={classes.Text} data-placeholder={"Write your notes here..."}/>
@@ -59,4 +64,14 @@ class Note extends Component {
     }
 }
 
-export default Note;
+const mapDispatchToProps = dispatch => {
+    return {
+        onUpdatePosition: (newX, newY, belongsTo, toUpdateID) => dispatch({type: actions.UPDATE_NOTE_POSITION,
+                                                    newX: newX,
+                                                    newY: newY,
+                                                    belongsTo: belongsTo,
+                                                    toUpdateID: toUpdateID})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Note);
