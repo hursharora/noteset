@@ -64,7 +64,7 @@ class Note extends Component {
     }
 
     onContentChangeLocal = event => {
-        console.log(event.target.innerHTML);
+        //console.log(event.target.innerHTML);
         this.props.onContentChange(event.target.innerHTML, this.props.belongsTo, this.props.id);
     }
 

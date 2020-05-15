@@ -12,40 +12,39 @@ const initialState = {
     ]
 }
 
+const noteUpdateHelper = (state, belongsTo, toUpdateID, objToMerge) => {
+    return {
+        ...state,
+        [belongsTo]: state[belongsTo].map(el => {
+            if (el.id === toUpdateID) {
+                return Object.assign({}, el, objToMerge);
+            }
+            return el;
+        })
+    };
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actions.UPDATE_NOTE_POSITION:
-            return {
-                ...state,
-                [action.belongsTo]: state[action.belongsTo].map(el => {
-                    if (el.id === action.toUpdateID) {
-                        return Object.assign({}, el, {xPos: action.newX, yPos: action.newY});
-                    }
-                    return el;
-                })
-            };
+            return noteUpdateHelper(
+                state,
+                action.belongsTo,
+                action.toUpdateID,
+                {xPos: action.newX, yPos: action.newY});
         case actions.UPDATE_NOTE_TITLE:
-            return {
-                ...state,
-                [action.belongsTo]: state[action.belongsTo].map(el => {
-                    if (el.id === action.toUpdateID) {
-                        return Object.assign({}, el, {title: action.newTitle});
-                    }
-                    return el;
-                })
-            };
+            return noteUpdateHelper(
+                state,
+                action.belongsTo,
+                action.toUpdateID,
+                {title: action.newTitle});
         case actions.UPDATE_NOTE_CONTENT:
-            return {
-                ...state,
-                [action.belongsTo]: state[action.belongsTo].map(el => {
-                    if (el.id === action.toUpdateID) {
-                        return Object.assign({}, el, {content: action.newContent});
-                    }
-                    return el;
-                })
-            };
+            return noteUpdateHelper(
+                state,
+                action.belongsTo,
+                action.toUpdateID,
+                {content: action.newContent});
         case actions.NEW_NOTE:
-            console.log(action.activeSpaceID);
             let noteSpace = [];
             if (state.hasOwnProperty(action.activeSpaceID)) {
                 noteSpace = [...state[action.activeSpaceID]];
