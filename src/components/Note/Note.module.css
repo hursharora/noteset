@@ -37,13 +37,3 @@
     user-select: none;
 }
 
-.Text {
-    color: white;
-    outline: none;
-    cursor: text;
-}
-
-.Text:empty:before {
-    content: attr(data-placeholder);
-    color: #acabab;
-}

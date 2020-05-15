@@ -1,0 +1,11 @@
+.NoteContentInputList {
+    color: white;
+    outline: none;
+    cursor: text;
+}
+
+.NoteContentInputList:empty:before {
+    content: attr(data-placeholder);
+    color: #acabab;
+}
+

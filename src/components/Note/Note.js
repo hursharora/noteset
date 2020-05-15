@@ -2,8 +2,15 @@ import React, {Component} from "react";
 import classes from "./Note.module.css"
 import {connect} from "react-redux";
 import * as actions from "../../store/actions";
+import NoteContentInput from "./NoteContentInput/NoteContentInput";
 
 class Note extends Component {
+    //manage title and content state locally and only update redux state on occasion to
+    //improve performance TODO
+    state = {
+        title: this.props.title,
+        content: this.props.content
+    }
 
     offsetX;
     offsetY;
@@ -52,13 +59,28 @@ class Note extends Component {
         document.removeEventListener("mouseup", this.mouseUpHandler);
     }
 
+    onTitleChangeLocal = event => {
+        this.props.onTitleChange(event.target.value, this.props.belongsTo, this.props.id);
+    }
+
+    onContentChangeLocal = event => {
+        console.log(event.target.innerHTML);
+        this.props.onContentChange(event.target.innerHTML, this.props.belongsTo, this.props.id);
+    }
+
     render() {
+
         return (
             <div className={classes.NoteContainer}
                  id={"note" + this.props.id} style={{left: this.props.xPos, top: this.props.yPos}}>
                 <div className={classes.Drag} onMouseDown={this.mouseDownHandler}>Drag</div>
-                <input type="text" placeholder="Title" className={classes.Title}/>
-                <div contentEditable className={classes.Text} data-placeholder={"Write your notes here..."}/>
+                <input type="text"
+                       placeholder="Title"
+                       className={classes.Title}
+                       onChange={this.onTitleChangeLocal}
+                       value={this.props.title}/>
+                <NoteContentInput content={this.props.content}
+                                  contentChange={this.onContentChangeLocal}/>
             </div>
         )
     }
@@ -66,11 +88,26 @@ class Note extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUpdatePosition: (newX, newY, belongsTo, toUpdateID) => dispatch({type: actions.UPDATE_NOTE_POSITION,
-                                                    newX: newX,
-                                                    newY: newY,
-                                                    belongsTo: belongsTo,
-                                                    toUpdateID: toUpdateID})
+        onUpdatePosition: (newX, newY, belongsTo, toUpdateID) => dispatch({
+            type: actions.UPDATE_NOTE_POSITION,
+            newX: newX,
+            newY: newY,
+            belongsTo: belongsTo,
+            toUpdateID: toUpdateID
+        }),
+        onTitleChange: (newTitle, belongsTo, toUpdateID) => dispatch({
+            type: actions.UPDATE_NOTE_TITLE,
+            newTitle: newTitle,
+            belongsTo: belongsTo,
+            toUpdateID: toUpdateID
+        }),
+        onContentChange: (newContent, belongsTo, toUpdateID) => dispatch({
+            type: actions.UPDATE_NOTE_CONTENT,
+            newContent: newContent,
+            belongsTo: belongsTo,
+            toUpdateID: toUpdateID
+        }),
+
     }
 }
 
