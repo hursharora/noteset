@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import classes from "./NoteContentInput.module.css"
 
 class NoteContentInput extends Component {
-    mapTextToInputs = () => {
-
-    }
-
     render() {
         return (
             <div contentEditable

@@ -10,7 +10,12 @@ const reducer = (state = initialState, action) => {
         case actions.NEW_SPACE:
             return {
                 ...state,
-                spaces: state.spaces.concat({name: "Notset1", id: new Date(),  position: state.spacesCount}),
+                spaces: state.spaces.concat(
+                    {
+                        name: "Notset1",
+                        id: new Date().toDateString(),
+                        position: state.spacesCount
+                    }),
                 spacesCount: state.spacesCount + 1
             };
         default:

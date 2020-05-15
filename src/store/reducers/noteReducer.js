@@ -44,6 +44,23 @@ const reducer = (state = initialState, action) => {
                     return el;
                 })
             };
+        case actions.NEW_NOTE:
+            console.log(action.activeSpaceID);
+            let noteSpace = [];
+            if (state.hasOwnProperty(action.activeSpaceID)) {
+                noteSpace = [...state[action.activeSpaceID]];
+            }
+            return {
+                ...state,
+                [action.activeSpaceID]: noteSpace.concat(
+                    {
+                        title: "",
+                        content: "",
+                        id: new Date(),
+                        xPos: "0px",
+                        yPos: "0px"
+                    })
+            }
         default:
             return state;
     }

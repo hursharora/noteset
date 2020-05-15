@@ -12,4 +12,15 @@
     color: White;
     cursor: default;
     user-select: none;
+    margin-right: auto;
+    transform: translateX(50%);
+}
+
+.NewNote {
+    margin-right: auto;
+}
+
+.Placeholder {
+    margin-left: auto;
+    margin-right: auto;
 }

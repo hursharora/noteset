@@ -23,8 +23,6 @@ class NoteContainer extends Component {
 
         return (
             <div className={classes.NoteContainer}>
-                {/*<Note id={1}/>*/}
-                {/*<Note id={2}/>*/}
                 {notesMapped}
             </div>
         );
