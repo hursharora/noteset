@@ -1,7 +1,8 @@
 import React from 'react';
-import classes from "./SideBar.module.css"
+import classes from "./SideBar.module.css";
 import {connect} from "react-redux";
-import * as actions from "../../store/actions"
+import * as setActions from "../../store/actions/setActions";
+import * as mainActions from "../../store/actions/mainActions";
 
 class SideBar extends React.Component {
 
@@ -41,10 +42,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onNewSpace:() => dispatch({type: actions.NEW_SPACE}),
-        onActiveSpaceChange: (newSpaceInd, newSpaceID) => dispatch({type: actions.SPACE_CHANGE,
-                                                                    newInd: newSpaceInd,
-                                                                    newID: newSpaceID})
+        onNewSpace:() => dispatch(setActions.newSpace()),
+        onActiveSpaceChange: (newSpaceInd, newSpaceID) => (
+            dispatch(mainActions.spaceChange(newSpaceInd, newSpaceID)))
     }
 }
 

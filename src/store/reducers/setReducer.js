@@ -1,4 +1,4 @@
-import * as actions from "../actions"
+import * as actions from "../actions/actionTypes"
 
 const initialState = {
     spaces: [{name: "NoteSet1", id: "noteset1", position: 0}],

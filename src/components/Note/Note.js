@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import classes from "./Note.module.css"
 import {connect} from "react-redux";
-import * as actions from "../../store/actions";
+import * as noteActions from "../../store/actions/noteActions"
 import NoteContentInput from "./NoteContentInput/NoteContentInput";
 
 class Note extends Component {
@@ -88,25 +88,12 @@ class Note extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUpdatePosition: (newX, newY, belongsTo, toUpdateID) => dispatch({
-            type: actions.UPDATE_NOTE_POSITION,
-            newX: newX,
-            newY: newY,
-            belongsTo: belongsTo,
-            toUpdateID: toUpdateID
-        }),
-        onTitleChange: (newTitle, belongsTo, toUpdateID) => dispatch({
-            type: actions.UPDATE_NOTE_TITLE,
-            newTitle: newTitle,
-            belongsTo: belongsTo,
-            toUpdateID: toUpdateID
-        }),
-        onContentChange: (newContent, belongsTo, toUpdateID) => dispatch({
-            type: actions.UPDATE_NOTE_CONTENT,
-            newContent: newContent,
-            belongsTo: belongsTo,
-            toUpdateID: toUpdateID
-        }),
+        onUpdatePosition: (newX, newY, belongsTo, toUpdateID) => (
+            dispatch(noteActions.updatePosition(newX, newY, belongsTo, toUpdateID))),
+        onTitleChange: (newTitle, belongsTo, toUpdateID) => (
+            dispatch(noteActions.updateTitle(newTitle, belongsTo, toUpdateID))),
+        onContentChange: (newContent, belongsTo, toUpdateID) => (
+            dispatch(noteActions.updateContent(newContent, belongsTo, toUpdateID)))
 
     }
 }

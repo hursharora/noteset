@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./TopBar.module.css"
-import * as actions from "../../store/actions";
+import * as noteActions from "../../store/actions/noteActions"
 import {connect} from "react-redux";
 
 const TopBar = props => {
@@ -22,7 +22,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onNewNote: (activeSpaceID) => dispatch({type: actions.NEW_NOTE, activeSpaceID: activeSpaceID})
+        onNewNote: (activeSpaceID) => dispatch(noteActions.newNote(activeSpaceID))
     }
 }
 
