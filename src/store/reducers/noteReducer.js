@@ -55,11 +55,22 @@ const reducer = (state = initialState, action) => {
                     {
                         title: "",
                         content: "",
-                        id: new Date(),
+                        id: "temp",
                         xPos: "0px",
                         yPos: "0px"
                     })
             }
+        case actions.UPDATE_NOTE_ID:
+            return {
+                ...state,
+                [action.belongsTo]: state[action.belongsTo].map(el => {
+                    if (el.id === "temp") {
+                        return Object.assign({}, el, {id: action.newID});
+                    }
+                    return el;
+                })
+            }
+
         default:
             return state;
     }

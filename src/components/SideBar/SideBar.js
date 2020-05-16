@@ -27,7 +27,8 @@ class SideBar extends React.Component {
                                    onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>{sp.name}</li>
                     })}
                 </ul>
-                <button onClick={this.props.onNewSpace} className={classes.NewSetButton}>New Set</button>
+                <button onClick={() => this.props.onNewSpace(this.props.spaceCount)}
+                        className={classes.NewSetButton}>New Set</button>
             </div>
         );
     }
@@ -36,13 +37,14 @@ class SideBar extends React.Component {
 const mapStateToProps = state => {
     return {
         spaces: state.set.spaces,
+        spaceCount: state.set.spaceCount,
         activePosition: state.main.activeSpacePosition
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onNewSpace:() => dispatch(setActions.newSpace()),
+        onNewSpace:(spaceCount) => dispatch(setActions.newSpace(spaceCount)),
         onActiveSpaceChange: (newSpaceInd, newSpaceID) => (
             dispatch(mainActions.spaceChange(newSpaceInd, newSpaceID)))
     }

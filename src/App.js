@@ -5,8 +5,8 @@ import MainContainer from "./page-containers/MainContainer/MainContainer";
 //free form notes that can be linked!?
 // -auto align notes
 //task: to add checkbox
-//New Note Button in topBar
 //drag note to corner for delete
+//disable new set button while loading!
 
 class App extends React.Component {
     render() {
