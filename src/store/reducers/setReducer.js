@@ -1,8 +1,8 @@
 import * as actions from "../actions/actionTypes"
 
 const initialState = {
-    spaces: [{name: "NoteSet1", id: "noteset1", position: 0}],
-    spaceCount: 1
+    spaces: [],
+    spaceCount: 0
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +28,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 spaces: updatedSpaces
+            };
+        case actions.INIT_SPACES:
+            return {
+                spaces: action.spaces,
+                spaceCount: action.spaces.length
             }
         default:
             return state;

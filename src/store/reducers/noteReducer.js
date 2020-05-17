@@ -70,7 +70,8 @@ const reducer = (state = initialState, action) => {
                     return el;
                 })
             }
-
+        case actions.INIT_NOTES:
+            return action.notes;
         default:
             return state;
     }

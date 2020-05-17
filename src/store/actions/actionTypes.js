@@ -4,6 +4,9 @@ export const UPDATE_SET_ID = "UPDATE_SET_ID";
 
 //main reducer
 export const SPACE_CHANGE = "SPACE_CHANGE";
+export const INIT_SPACES = "INIT_SPACES";
+export const INIT_NOTES = "INIT_NOTES";
+export const DONE_LOADING = "DONE_LOADING";
 
 //note reducer
 export const UPDATE_NOTE_POSITION = "UPDATE_NOTE_POSITION";

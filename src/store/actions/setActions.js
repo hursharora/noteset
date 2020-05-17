@@ -22,7 +22,7 @@ export const newSpace = (spaceCount) => {
         dispatch(newSpaceLocal(spaceCount)); //disable new space button here
         const newSpace = {
             name: "NoteSet1",
-            position: spaceCount + 1
+            position: spaceCount
         }
         axiosNotes.post("/notespaces.json", newSpace)
             .then(r => {

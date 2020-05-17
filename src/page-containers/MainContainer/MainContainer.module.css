@@ -1,6 +1,7 @@
 .MainContainer {
     width: 100vw;
     height: 100vh;
+    background-color: rgb(10, 28, 50);
 }
 
 .ContainerRow {
