@@ -17,8 +17,15 @@ export const updateSetID = (newID) => {
     }
 }
 
+export const toggleNewSpaceLoading = () => {
+    return {
+        type: actionTypes.TOGGLE_NEW_SPACE_LOADING
+    }
+}
+
 export const newSpace = (spaceCount) => {
     return dispatch => {
+        dispatch(toggleNewSpaceLoading());
         dispatch(newSpaceLocal(spaceCount)); //disable new space button here
         const newSpace = {
             name: "NoteSet1",
@@ -27,6 +34,7 @@ export const newSpace = (spaceCount) => {
         axiosNotes.post("/notespaces.json", newSpace)
             .then(r => {
                 dispatch(updateSetID(r.data.name)); //enable it here
+                dispatch(toggleNewSpaceLoading());
                 axiosNotes.patch("/notespaces/" + r.data.name + ".json", {id: r.data.name})
                     .catch(e => console.log(e));
             });

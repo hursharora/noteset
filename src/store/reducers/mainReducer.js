@@ -3,8 +3,10 @@ import * as actions from "../actions/actionTypes"
 const initialState = {
     activeSpacePosition: 0,
     initLoading: true,
+    newNoteLoading: false,
+    newSpaceLoading: false,
     activeSpaceID: null,
-    auth: true
+    auth: null //replace with auth token once logged in?
 }
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +21,16 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 initLoading: false
+            };
+        case actions.TOGGLE_NEW_NOTE_LOADING:
+            return {
+                ...state,
+                newNoteLoading: !state.newNoteLoading
+            };
+        case actions.TOGGLE_NEW_SPACE_LOADING:
+            return {
+                ...state,
+                newSpaceLoading: !state.newSpaceLoading
             }
         default:
             return state;

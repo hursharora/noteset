@@ -28,7 +28,8 @@ class SideBar extends React.Component {
                     })}
                 </ul>
                 <button onClick={() => this.props.onNewSpace(this.props.spaceCount)}
-                        className={classes.NewSetButton}>New Set</button>
+                        className={classes.NewSetButton}
+                        disabled={this.props.newSpaceDisabled}>New Set</button>
             </div>
         );
     }
@@ -38,7 +39,8 @@ const mapStateToProps = state => {
     return {
         spaces: state.set.spaces,
         spaceCount: state.set.spaceCount,
-        activePosition: state.main.activeSpacePosition
+        activePosition: state.main.activeSpacePosition,
+        newSpaceDisabled: state.main.newSpaceLoading
     };
 }
 

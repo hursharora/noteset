@@ -71,8 +71,15 @@ export const updateNoteID = (belongsToSpace, newID) => {
     }
 }
 
+export const toggleNewNoteLoading = () => {
+    return {
+        type: actionTypes.TOGGLE_NEW_NOTE_LOADING
+    }
+}
+
 export const newNote = (activeSpaceID) => {
     return dispatch => {
+        dispatch(toggleNewNoteLoading());
         dispatch(newNoteLocal(activeSpaceID)); //disable new note button here
         const newNote = {
             title: "",
@@ -83,6 +90,7 @@ export const newNote = (activeSpaceID) => {
         axiosNotes.post("/notespaces/" + activeSpaceID + "/notes.json", newNote)
             .then(r => {
                 dispatch(updateNoteID(activeSpaceID, r.data.name)); //enable new note button
+                dispatch(toggleNewNoteLoading());
                 axiosNotes.patch("/notespaces/" + activeSpaceID + "/notes/" + r.data.name + ".json",
                     {id: r.data.name})
                     .catch(e => console.log(e));

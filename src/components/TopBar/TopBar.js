@@ -9,6 +9,7 @@ const TopBar = props => {
             <div className={classes.Placeholder}/>
             <h2 className={classes.TitleText}>NoteSet</h2>
             <button className={classes.NewNote}
+                    disabled={props.newNoteDisabled}
                     onClick={() => props.onNewNote(props.currActiveSpace)}>New Note</button>
         </nav>
     );
@@ -16,7 +17,8 @@ const TopBar = props => {
 
 const mapStateToProps = state => {
     return {
-        currActiveSpace: state.main.activeSpaceID
+        currActiveSpace: state.main.activeSpaceID,
+        newNoteDisabled: state.main.newNoteLoading
     };
 };
 
