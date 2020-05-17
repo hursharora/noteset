@@ -28,7 +28,7 @@ class Note extends Component {
         let toSetLeft = event.clientX - this.offsetX;
         let toSetTop = event.clientY - this.offsetY;
         //console.log("tosets", toSetLeft, toSetTop);
-        console.log(element.parentElement.offsetWidth);
+        //console.log(element.parentElement.offsetWidth);
         //console.log(toSetLeft);
         //console.log(element.parentElement.clientWidth - this.offsetX);
         //console.log(element.parentElement.clientWidth - 400);

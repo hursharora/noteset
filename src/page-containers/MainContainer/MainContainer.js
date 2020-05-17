@@ -6,6 +6,7 @@ import classes from "./MainContainer.module.css"
 import {connect} from "react-redux"
 import Spinner from "../../components/Spinner/Spinner";
 import * as mainActions from "../../store/actions/mainActions";
+import ConfirmationModal from "../../components/ConfirmationModal/ConfirmationModal";
 
 class MainContainer extends React.Component {
     componentDidMount() {
@@ -17,11 +18,12 @@ class MainContainer extends React.Component {
         if (!this.props.loading) {
             content = (
                 <>
-                <TopBar/>
-                <div className={classes.ContainerRow}>
-                    <SideBar/>
-                    <NoteContainer/>
-                </div>
+                    <ConfirmationModal/>
+                    <TopBar/>
+                    <div className={classes.ContainerRow}>
+                        <SideBar/>
+                        <NoteContainer/>
+                    </div>
                 </>
             )
         }
