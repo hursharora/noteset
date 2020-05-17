@@ -1,7 +1,7 @@
 import * as actionTypes from "./actionTypes";
 import axiosNotes from "../../axiosNotes";
 
-export const updatePosition = (newX, newY, belongsTo, toUpdateID) => {
+export const updatePositionLocal = (newX, newY, belongsTo, toUpdateID) => {
     return {
         type: actionTypes.UPDATE_NOTE_POSITION,
         newX: newX,
@@ -11,7 +11,16 @@ export const updatePosition = (newX, newY, belongsTo, toUpdateID) => {
     }
 }
 
-export const updateTitle = (newTitle, belongsTo, toUpdateID) => {
+export const updatePosition = (newX, newY, belongsTo, toUpdateID) => {
+    return dispatch => {
+        dispatch(updatePositionLocal(newX, newY, belongsTo, toUpdateID));
+        let requestString = "/notespaces/" + belongsTo + "/notes/" + toUpdateID + ".json";
+        axiosNotes.patch(requestString, {xPos: newX, yPos: newY})
+            .catch(e => console.log(e));
+    }
+}
+
+export const updateTitleLocal = (newTitle, belongsTo, toUpdateID) => {
     return {
         type: actionTypes.UPDATE_NOTE_TITLE,
         newTitle: newTitle,
@@ -20,12 +29,30 @@ export const updateTitle = (newTitle, belongsTo, toUpdateID) => {
     }
 }
 
-export const updateContent = (newContent, belongsTo, toUpdateID) => {
+export const updateTitle = (newTitle, belongsTo, toUpdateID) => {
+    return dispatch => {
+        dispatch(updateTitleLocal(newTitle, belongsTo, toUpdateID));
+        let requestString = "/notespaces/" + belongsTo + "/notes/" + toUpdateID + ".json";
+        axiosNotes.patch(requestString, {title: newTitle})
+            .catch(e => console.log(e));
+    }
+}
+
+export const updateContentLocal = (newContent, belongsTo, toUpdateID) => {
     return {
         type: actionTypes.UPDATE_NOTE_CONTENT,
         newContent: newContent,
         belongsTo: belongsTo,
         toUpdateID: toUpdateID
+    }
+}
+
+export const updateContent = (newContent, belongsTo, toUpdateID) => {
+    return dispatch => {
+        dispatch(updateContentLocal(newContent, belongsTo, toUpdateID));
+        let requestString = "/notespaces/" + belongsTo + "/notes/" + toUpdateID + ".json";
+        axiosNotes.patch(requestString, {content: newContent})
+            .catch(e => console.log(e));
     }
 }
 
