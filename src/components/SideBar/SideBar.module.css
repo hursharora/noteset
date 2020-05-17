@@ -8,11 +8,9 @@
 
 .SideBar ul {
     list-style: none;
-    align-self: center;
     padding: 0;
     margin: 0;
     width: 100%;
-    text-align: center;
 }
 
 .SideBar li {
@@ -36,6 +34,20 @@
     cursor: pointer;
     border-style: solid;
     transition: 0.3s ease;
+}
+
+.DeleteButton {
+    background-color: transparent;
+    float: right;
+    cursor: pointer;
+    border: none;
+    border-radius: 360px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.DeleteButton:hover {
+    background-color: rgba(10, 28, 50, 0.5);
 }
 
 .NewSetButton:hover {

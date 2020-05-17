@@ -56,13 +56,6 @@ export const updateContent = (newContent, belongsTo, toUpdateID) => {
     }
 }
 
-export const newNoteLocal = activeSpaceID => {
-    return {
-        type: actionTypes.NEW_NOTE,
-        activeSpaceID: activeSpaceID
-    }
-}
-
 export const updateNoteID = (belongsToSpace, newID) => {
     return {
         type: actionTypes.UPDATE_NOTE_ID,
@@ -74,6 +67,13 @@ export const updateNoteID = (belongsToSpace, newID) => {
 export const toggleNewNoteLoading = () => {
     return {
         type: actionTypes.TOGGLE_NEW_NOTE_LOADING
+    }
+}
+
+export const newNoteLocal = activeSpaceID => {
+    return {
+        type: actionTypes.NEW_NOTE,
+        activeSpaceID: activeSpaceID
     }
 }
 

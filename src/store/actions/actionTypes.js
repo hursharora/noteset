@@ -1,6 +1,7 @@
 //set reducer
 export const NEW_SPACE = "NEW_SPACE";
 export const UPDATE_SET_ID = "UPDATE_SET_ID";
+export const DELETE_SPACE = "DELETE_SPACE";
 
 //main reducer
 export const SPACE_CHANGE = "SPACE_CHANGE";

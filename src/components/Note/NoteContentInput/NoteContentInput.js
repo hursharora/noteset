@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import classes from "./NoteContentInput.module.css"
+import ContentEditable from "react-contenteditable";
 
 class NoteContentInput extends Component {
     render() {
         return (
-            <div contentEditable
-                 className={classes.NoteContentInputList}
-                 data-placeholder={"Write your notes here..."}
-                 onBlur={this.props.contentChange}
-                 suppressContentEditableWarning={true}
-            >{this.props.content}</div>
+            <ContentEditable
+                data-placeholder={"Write your notes here..."}
+                className={classes.NoteContentInputList}
+                onChange={this.props.contentChange}
+                html={this.props.content}
+            />
         );
     }
 }

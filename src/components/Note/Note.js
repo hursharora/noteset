@@ -8,8 +8,6 @@ import DragIndicator from "../../assets/drag_indicator.svg";
 class Note extends Component {
     offsetX;
     offsetY;
-    offsetRight;
-    offsetBottom;
 
     mouseDownHandler = event => {
         //console.log("mousedown");
@@ -70,7 +68,7 @@ class Note extends Component {
 
     onContentChangeLocal = event => {
         //console.log(event.target.innerHTML);
-        this.props.onContentChange(event.target.innerHTML, this.props.belongsTo, this.props.id);
+        this.props.onContentChange(event.target.value, this.props.belongsTo, this.props.id);
     }
 
     render() {

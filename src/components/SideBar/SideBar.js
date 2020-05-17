@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import * as setActions from "../../store/actions/setActions";
 import * as mainActions from "../../store/actions/mainActions";
 import addIcon from "../../assets/add.svg";
+import deleteIcon from "../../assets/delete_cross.svg";
 
 class SideBar extends React.Component {
 
@@ -22,10 +23,20 @@ class SideBar extends React.Component {
                             this.firstActiveId = sp.id;
                             return <li key={sp.id}
                                        className={classes.ActiveItem}
-                                       onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>{sp.name}</li>
+                                       onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>
+                                {sp.name}
+                                <button className={classes.DeleteButton}>
+                                    <img src={deleteIcon} alt="Delete"/>
+                                </button>
+                            </li>
                         }
                         return <li key={sp.id}
-                                   onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>{sp.name}</li>
+                                   onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>
+                            {sp.name}
+                            <button className={classes.DeleteButton}>
+                                <img src={deleteIcon} alt="Delete"/>
+                            </button>
+                        </li>
                     })}
                 </ul>
                 <button onClick={() => this.props.onNewSpace(this.props.spaceCount)}
