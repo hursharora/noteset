@@ -16,6 +16,7 @@
 }
 
 .SideBar li {
+    font-family: 'Raleway', sans-serif;
     cursor: pointer;
     padding: 16px;
     font-size: 16px;
@@ -26,7 +27,23 @@
 
 .NewSetButton {
     margin: 16px;
-    padding: 8px;
+    padding: 4px;
+    background-color: transparent;
+    outline: none;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    border-style: solid;
+    transition: 0.3s ease;
+}
+
+.NewSetButton:hover {
+    background-color: rgba(10, 28, 50, 0.2);
+}
+
+.NewSetButton img {
+    height: 32px;
 }
 
 .SideBar li:hover, .ActiveItem {

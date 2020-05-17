@@ -3,6 +3,7 @@ import classes from "./SideBar.module.css";
 import {connect} from "react-redux";
 import * as setActions from "../../store/actions/setActions";
 import * as mainActions from "../../store/actions/mainActions";
+import addIcon from "../../assets/add.svg";
 
 class SideBar extends React.Component {
 
@@ -29,7 +30,8 @@ class SideBar extends React.Component {
                 </ul>
                 <button onClick={() => this.props.onNewSpace(this.props.spaceCount)}
                         className={classes.NewSetButton}
-                        disabled={this.props.newSpaceDisabled}>New Set</button>
+                        disabled={this.props.newSpaceDisabled}><img src={addIcon} alt="New Space"/>
+                </button>
             </div>
         );
     }

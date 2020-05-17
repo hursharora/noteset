@@ -3,6 +3,7 @@ import classes from "./Note.module.css"
 import {connect} from "react-redux";
 import * as noteActions from "../../store/actions/noteActions"
 import NoteContentInput from "./NoteContentInput/NoteContentInput";
+import DragIndicator from "../../assets/drag_indicator.svg";
 
 class Note extends Component {
     //manage title and content state locally and only update redux state on occasion to
@@ -73,7 +74,9 @@ class Note extends Component {
         return (
             <div className={classes.NoteContainer}
                  id={"note" + this.props.id} style={{left: this.props.xPos, top: this.props.yPos}}>
-                <div className={classes.Drag} onMouseDown={this.mouseDownHandler}>Drag</div>
+                <div className={classes.Drag} onMouseDown={this.mouseDownHandler}>
+                    <img src={DragIndicator} alt="drag"/>
+                </div>
                 <input type="text"
                        placeholder="Title"
                        className={classes.Title}

@@ -14,10 +14,23 @@
     user-select: none;
     margin-right: auto;
     transform: translateX(50%);
+    font-family: 'Raleway', sans-serif;
 }
 
 .NewNote {
+    font-family: 'Raleway', sans-serif;
+    padding: 6px;
     margin-right: auto;
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    border-style: solid;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.NewNote:hover {
+    background-color: rgba(10, 28, 50, 0.4);
 }
 
 .Placeholder {
