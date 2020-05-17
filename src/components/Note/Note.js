@@ -6,21 +6,17 @@ import NoteContentInput from "./NoteContentInput/NoteContentInput";
 import DragIndicator from "../../assets/drag_indicator.svg";
 
 class Note extends Component {
-    //manage title and content state locally and only update redux state on occasion to
-    //improve performance TODO
-    state = {
-        title: this.props.title,
-        content: this.props.content
-    }
-
     offsetX;
     offsetY;
+    offsetRight;
+    offsetBottom;
 
     mouseDownHandler = event => {
         //console.log("mousedown");
         const element = document.getElementById("note" + this.props.id);
         this.offsetX = event.clientX - element.offsetLeft;
         this.offsetY = event.clientY - element.offsetTop;
+
 
         document.addEventListener("mousemove", this.mouseMoveHandler);
         document.addEventListener("mouseup", this.mouseUpHandler)
@@ -29,23 +25,31 @@ class Note extends Component {
     mouseMoveHandler = event => {
         //console.log("mousemove");
         const element = document.getElementById("note" + this.props.id);
+        //console.log("offsets", this.offsetX, this.offsetY);
+
         let toSetLeft = event.clientX - this.offsetX;
         let toSetTop = event.clientY - this.offsetY;
+        //console.log("tosets", toSetLeft, toSetTop);
+        console.log(element.parentElement.offsetWidth);
         //console.log(toSetLeft);
         //console.log(element.parentElement.clientWidth - this.offsetX);
         //console.log(element.parentElement.clientWidth - 400);
+        let elementWidth = element.offsetWidth;
+        let elementHeight = element.offsetHeight;
+        let parentWidth = element.parentElement.offsetWidth;
+        let parentHeight = element.parentElement.offsetHeight;
 
         if (toSetLeft < 0) {
             toSetLeft = 0;
         }
-        if (toSetLeft > element.parentElement.clientWidth - 400) {
-            toSetLeft = element.parentElement.clientWidth - 400;
+        if (parentWidth - (toSetLeft + elementWidth) < 0) {
+            toSetLeft = parentWidth - elementWidth;
         }
         if (toSetTop < 0) {
             toSetTop = 0;
         }
-        if (toSetTop > element.parentElement.clientHeight - 200) {
-            toSetTop = element.parentElement.clientHeight - 200;
+        if (parentHeight - (toSetTop + elementHeight) < 0) {
+            toSetTop = parentHeight - elementHeight;
         }
         element.style.left = toSetLeft + "px";
         element.style.top = toSetTop + "px";

@@ -1,7 +1,7 @@
 .TopBar {
     display: flex;
     flex-direction: row;
-    height: 5%;
+    height: 7%;
     background: #1a2f4e;
     z-index: 500;
     align-items: center;
