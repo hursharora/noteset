@@ -25,15 +25,33 @@
     outline: none;
 }
 
+.ActionsContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .Title::placeholder {
     color: #acabab;
+}
+
+.CloseButton {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: 0.3s ease;
+}
+
+.CloseButton:hover {
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .Drag {
     background-color: transparent;
     cursor: move;
     width: fit-content;
-    align-self: flex-end;
     user-select: none;
 }
 

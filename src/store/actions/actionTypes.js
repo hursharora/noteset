@@ -19,3 +19,4 @@ export const UPDATE_NOTE_TITLE = "UPDATE_NOTE_TITLE";
 export const NEW_NOTE = "NEW_NOTE";
 export const UPDATE_NOTE_ID = "UPDATE_NOTE_ID";
 export const DELETE_NOTES_SET = "DELETE_NOTES_SET";
+export const DELETE_NOTE = "DELETE_NOTE";

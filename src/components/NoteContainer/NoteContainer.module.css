@@ -5,3 +5,10 @@
     overflow: hidden;
     position: relative;
 }
+
+.EmptyContainerMessage {
+    position: absolute;
+    color: #CCCCCC;
+    top: 40%;
+    left: 40%;
+}

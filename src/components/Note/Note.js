@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import * as noteActions from "../../store/actions/noteActions"
 import NoteContentInput from "./NoteContentInput/NoteContentInput";
 import DragIndicator from "../../assets/drag_indicator.svg";
+import closeIcon from "../../assets/delete_cross.svg";
 
 class Note extends Component {
     offsetX;
@@ -21,6 +22,7 @@ class Note extends Component {
     }
 
     mouseMoveHandler = event => {
+        event.preventDefault();
         //console.log("mousemove");
         const element = document.getElementById("note" + this.props.id);
         //console.log("offsets", this.offsetX, this.offsetY);
@@ -76,9 +78,16 @@ class Note extends Component {
         return (
             <div className={classes.NoteContainer}
                  id={"note" + this.props.id} style={{left: this.props.xPos, top: this.props.yPos}}>
-                <div className={classes.Drag} onMouseDown={this.mouseDownHandler}>
-                    <img src={DragIndicator} alt="drag"/>
+                <div className={classes.ActionsContainer}>
+                    <button className={classes.CloseButton}
+                            onClick={() => this.props.onDeleteNote(this.props.belongsTo, this.props.id)}>
+                        <img src={closeIcon} alt="Close"/>
+                    </button>
+                    <div className={classes.Drag} onMouseDown={this.mouseDownHandler}>
+                        <img src={DragIndicator} alt="drag"/>
+                    </div>
                 </div>
+
                 <input type="text"
                        placeholder="Title"
                        className={classes.Title}
@@ -98,7 +107,9 @@ const mapDispatchToProps = dispatch => {
         onTitleChange: (newTitle, belongsTo, toUpdateID) => (
             dispatch(noteActions.updateTitle(newTitle, belongsTo, toUpdateID))),
         onContentChange: (newContent, belongsTo, toUpdateID) => (
-            dispatch(noteActions.updateContent(newContent, belongsTo, toUpdateID)))
+            dispatch(noteActions.updateContent(newContent, belongsTo, toUpdateID))),
+        onDeleteNote: (spaceID, noteID) => (
+            dispatch(noteActions.deleteNote(spaceID, noteID)))
 
     }
 }

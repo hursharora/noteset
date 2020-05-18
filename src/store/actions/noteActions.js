@@ -98,4 +98,20 @@ export const newNote = (activeSpaceID) => {
     }
 }
 
+export const deleteNoteLocal = (spaceID, noteID) => {
+    return {
+        type: actionTypes.DELETE_NOTE,
+        spaceID: spaceID,
+        noteID: noteID
+    }
+}
+
+export const deleteNote = (spaceID, noteID) => {
+    return dispatch => {
+        dispatch(deleteNoteLocal(spaceID, noteID));
+        axiosNotes.delete("/notespaces/" + spaceID + "/notes/" + noteID + ".json")
+            .catch(e => console.log(e));
+    }
+}
+
 

@@ -76,6 +76,11 @@ const reducer = (state = initialState, action) => {
             const stateCopy = {...state};
             delete stateCopy[action.spaceID];
             return stateCopy;
+        case actions.DELETE_NOTE:
+            return {
+                ...state,
+                [action.spaceID]: state[action.spaceID].filter(el => el.id !== action.noteID)
+            }
         default:
             return state;
     }
