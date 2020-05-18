@@ -2,7 +2,8 @@ import * as actions from "../actions/actionTypes"
 
 const initialState = {
     spaces: [],
-    spaceCount: 0
+    spaceCount: 0,
+    deletingSpace: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,8 +14,7 @@ const reducer = (state = initialState, action) => {
                 spaces: state.spaces.concat(
                     {
                         name: action.name,
-                        id: action.id,
-                        position: action.position
+                        id: action.id
                     }),
                 spaceCount: state.spaceCount + 1
             };
@@ -31,8 +31,14 @@ const reducer = (state = initialState, action) => {
             };
         case actions.INIT_SPACES:
             return {
+                ...state,
                 spaces: action.spaces,
                 spaceCount: action.spaces.length
+            }
+        case actions.TOGGLE_DELETING_SPACE:
+            return {
+                ...state,
+                deletingSpace: action.spaceID
             }
         default:
             return state;

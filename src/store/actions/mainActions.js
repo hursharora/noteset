@@ -14,8 +14,7 @@ export const initSpaces = (data) => {
     for (let key in data) {
         spaces.push({
             name: data[key].name,
-            id: data[key].id,
-            position: data[key].position
+            id: data[key].id
         })
     }
     return {

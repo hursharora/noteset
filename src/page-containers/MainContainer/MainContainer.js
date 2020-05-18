@@ -18,7 +18,7 @@ class MainContainer extends React.Component {
         if (!this.props.loading) {
             content = (
                 <>
-                    <ConfirmationModal/>
+                    {this.props.deletingSpace ? <ConfirmationModal/> : null}
                     <TopBar/>
                     <div className={classes.ContainerRow}>
                         <SideBar/>
@@ -43,7 +43,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        loading: state.main.initLoading
+        loading: state.main.initLoading,
+        deletingSpace: state.set.deletingSpace
     }
 }
 

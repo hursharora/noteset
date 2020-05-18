@@ -3,7 +3,7 @@ import classes from "./BackDrop.module.css"
 
 const BackDrop = props => {
     return (
-        <div className={classes.BackDrop}/>
+        <div className={classes.BackDrop} onClick={props.clicked}/>
     );
 };
 

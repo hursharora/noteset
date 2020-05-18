@@ -4,7 +4,6 @@ import axiosNotes from "../../axiosNotes";
 export const newSpaceLocal = (spaceCount) => {
     return {
         type: actionTypes.NEW_SPACE,
-        position: spaceCount,
         id: "temp",
         name: "NoteSet1"
     };
@@ -28,8 +27,7 @@ export const newSpace = (spaceCount) => {
         dispatch(toggleNewSpaceLoading());
         dispatch(newSpaceLocal(spaceCount)); //disable new space button here
         const newSpace = {
-            name: "NoteSet1",
-            position: spaceCount
+            name: "NoteSet1"
         }
         axiosNotes.post("/notespaces.json", newSpace)
             .then(r => {
@@ -38,5 +36,12 @@ export const newSpace = (spaceCount) => {
                 axiosNotes.patch("/notespaces/" + r.data.name + ".json", {id: r.data.name})
                     .catch(e => console.log(e));
             });
+    }
+}
+
+export const deleteSpace = (spaceID) => {
+    return {
+        type: actionTypes.TOGGLE_DELETING_SPACE,
+        spaceID: spaceID
     }
 }

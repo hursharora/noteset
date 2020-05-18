@@ -1,7 +1,7 @@
 import * as actions from "../actions/actionTypes"
 
 const initialState = {
-    activeSpacePosition: 0,
+    activeSpacePosition: 0, //active space INDEX in state.set.spaces array
     initLoading: true,
     newNoteLoading: false,
     newSpaceLoading: false,

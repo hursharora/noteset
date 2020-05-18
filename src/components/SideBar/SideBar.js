@@ -9,6 +9,7 @@ import deleteIcon from "../../assets/delete_cross.svg";
 class SideBar extends React.Component {
 
     firstActiveId;
+
     componentDidMount() {
         //set state.main.activeSpaceId to id of space at position 0
         this.props.onActiveSpaceChange(0, this.firstActiveId);
@@ -19,24 +20,20 @@ class SideBar extends React.Component {
             <div className={classes.SideBar}>
                 <ul>
                     {this.props.spaces.map((sp, index) => {
-                        if (sp.position === this.props.activePosition) {
+                        if (index === this.props.activePosition) {
                             this.firstActiveId = sp.id;
-                            return <li key={sp.id}
-                                       className={classes.ActiveItem}
-                                       onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>
+                        }
+                        return (
+                            <li key={sp.id}
+                                className={index === this.props.activePosition ? classes.ActiveItem: null}
+                                onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>
                                 {sp.name}
-                                <button className={classes.DeleteButton}>
+                                <button className={classes.DeleteButton}
+                                        onClick={() => this.props.onDeleteSpace(sp.id)}>
                                     <img src={deleteIcon} alt="Delete"/>
                                 </button>
                             </li>
-                        }
-                        return <li key={sp.id}
-                                   onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>
-                            {sp.name}
-                            <button className={classes.DeleteButton}>
-                                <img src={deleteIcon} alt="Delete"/>
-                            </button>
-                        </li>
+                        )
                     })}
                 </ul>
                 <button onClick={() => this.props.onNewSpace(this.props.spaceCount)}
@@ -55,15 +52,18 @@ const mapStateToProps = state => {
         activePosition: state.main.activeSpacePosition,
         newSpaceDisabled: state.main.newSpaceLoading
     };
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {
-        onNewSpace:(spaceCount) => dispatch(setActions.newSpace(spaceCount)),
+        onNewSpace: (spaceCount) => dispatch(setActions.newSpace(spaceCount)),
         onActiveSpaceChange: (newSpaceInd, newSpaceID) => (
-            dispatch(mainActions.spaceChange(newSpaceInd, newSpaceID)))
-    }
-}
+            dispatch(mainActions.spaceChange(newSpaceInd, newSpaceID))),
+        onDeleteSpace: (deleteSpaceID, deleteSpacePosition) => (
+            dispatch(setActions.deleteSpace(deleteSpaceID))
+        )
+    };
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideBar);

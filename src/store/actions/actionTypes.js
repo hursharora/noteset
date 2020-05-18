@@ -1,7 +1,9 @@
 //set reducer
 export const NEW_SPACE = "NEW_SPACE";
 export const UPDATE_SET_ID = "UPDATE_SET_ID";
+export const TOGGLE_DELETING_SPACE = "TOGGLE_DELETING_SPACE";
 export const DELETE_SPACE = "DELETE_SPACE";
+export const UPDATE_SET_POSITION = "UPDATE_SET_POSITION";
 
 //main reducer
 export const SPACE_CHANGE = "SPACE_CHANGE";
