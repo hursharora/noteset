@@ -1,11 +1,11 @@
 import * as actionTypes from "./actionTypes";
 import axiosNotes from "../../axiosNotes";
 
-export const newSpaceLocal = (spaceCount) => {
+export const newSpaceLocal = (newSpaceName) => {
     return {
         type: actionTypes.NEW_SPACE,
         id: "temp",
-        name: "NoteSet1"
+        name: newSpaceName
     };
 }
 
@@ -22,12 +22,12 @@ export const toggleNewSpaceLoading = () => {
     }
 }
 
-export const newSpace = (spaceCount) => {
+export const newSpace = (newSpaceName) => {
     return dispatch => {
         dispatch(toggleNewSpaceLoading());
-        dispatch(newSpaceLocal(spaceCount)); //disable new space button here
+        dispatch(newSpaceLocal(newSpaceName)); //disable new space button here
         const newSpace = {
-            name: "NoteSet1"
+            name: newSpaceName
         }
         axiosNotes.post("/notespaces.json", newSpace)
             .then(r => {
@@ -60,10 +60,17 @@ export const continueDeleteNotesLocal = spaceID => {
     }
 }
 
+export const setActiveSpaceNull = () => {
+    return {
+        type: actionTypes.ACTIVE_SPACE_NULL
+    }
+}
+
 export const continueDeleteSpace = (spaceID) => {
     return dispatch => {
         dispatch(continueDeleteSpaceLocal(spaceID));
         dispatch(continueDeleteNotesLocal(spaceID));
+        dispatch(setActiveSpaceNull());
         axiosNotes.delete("/notespaces/" + spaceID + ".json")
             .catch(e => console.log(e));
     }

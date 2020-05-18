@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 class NoteContainer extends Component {
     render() {
         let notesMapped = <h1 className={classes.EmptyContainerMessage}>Add some notes!</h1>;
+
         let currNotes = this.props.allNotes[this.props.activeSpaceID];
         if (this.props.activeSpaceID && currNotes !== undefined && currNotes.length > 0) {
             notesMapped = currNotes.map(el => (
@@ -17,6 +18,9 @@ class NoteContainer extends Component {
                       title={el.title}
                       content={el.content}/>
             ))
+        }
+        if (!this.props.activeSpaceID) {
+            notesMapped = <h1 className={classes.EmptyContainerMessage}>Select a set</h1>;
         }
 
 

@@ -9,7 +9,7 @@ const TopBar = props => {
             <div className={classes.Placeholder}/>
             <h2 className={classes.TitleText}>NoteSet</h2>
             <button className={classes.NewNote}
-                    disabled={props.newNoteDisabled}
+                    disabled={props.newNoteDisabled || props.currActiveSpace === null}
                     onClick={() => props.onNewNote(props.currActiveSpace)}>New Note</button>
         </nav>
     );

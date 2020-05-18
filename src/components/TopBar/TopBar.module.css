@@ -33,6 +33,11 @@
     background-color: rgba(10, 28, 50, 0.4);
 }
 
+.NewNote:disabled {
+    color: #444444;
+    border-color:#444444;
+}
+
 .Placeholder {
     margin-left: auto;
     margin-right: auto;

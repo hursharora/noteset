@@ -5,8 +5,13 @@ import * as setActions from "../../store/actions/setActions";
 import * as mainActions from "../../store/actions/mainActions";
 import addIcon from "../../assets/add.svg";
 import deleteIcon from "../../assets/delete_cross.svg";
+import confirmAdd from "../../assets/done.svg";
 
 class SideBar extends React.Component {
+    state = {
+        naming: false,
+        name: null
+    }
 
     firstActiveId;
 
@@ -15,7 +20,51 @@ class SideBar extends React.Component {
         this.props.onActiveSpaceChange(0, this.firstActiveId);
     }
 
+    toggleNamingHandler = () => {
+        this.setState(prevState => (
+            {naming: !prevState.naming}
+        ));
+    }
+
+    inputChangeHandler = (event) => {
+        this.setState({name: event.target.value})
+    }
+
+    confirmAddSpaceHandler = event => {
+        this.props.onNewSpace(this.state.name);
+        this.setState({naming: false});
+    }
+
     render() {
+        let newSpace = (
+            <button onClick={this.toggleNamingHandler}
+                    className={classes.NewSetButton}
+                    disabled={this.props.newSpaceDisabled}><img src={addIcon} alt="New Space"/>
+            </button>
+        );
+
+        if (this.state.naming) {
+            newSpace = (
+                <div className={classes.InputContainer}>
+                    <input type="text"
+                           autoFocus
+                           placeholder="New set name..."
+                           onChange={this.inputChangeHandler}
+                           className={classes.Input}
+                           maxLength={40}
+                           onSubmit={this.confirmAddSpaceHandler}/>
+                    <button className={classes.InputButton}
+                            onClick={this.confirmAddSpaceHandler}>
+                        <img src={confirmAdd} alt="Add"/>
+                    </button>
+                    <button onClick={this.toggleNamingHandler}
+                            className={classes.InputButton}>
+                        <img src={deleteIcon} alt="Cancel"/>
+                    </button>
+                </div>
+            )
+        }
+
         return (
             <div className={classes.SideBar}>
                 <ul>
@@ -25,7 +74,7 @@ class SideBar extends React.Component {
                         }
                         return (
                             <li key={sp.id}
-                                className={index === this.props.activePosition ? classes.ActiveItem: null}
+                                className={index === this.props.activePosition ? classes.ActiveItem : null}
                                 onClick={() => this.props.onActiveSpaceChange(index, sp.id)}>
                                 {sp.name}
                                 <button className={classes.DeleteButton}
@@ -36,10 +85,7 @@ class SideBar extends React.Component {
                         )
                     })}
                 </ul>
-                <button onClick={() => this.props.onNewSpace(this.props.spaceCount)}
-                        className={classes.NewSetButton}
-                        disabled={this.props.newSpaceDisabled}><img src={addIcon} alt="New Space"/>
-                </button>
+                {newSpace}
             </div>
         );
     }
@@ -56,10 +102,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onNewSpace: (spaceCount) => dispatch(setActions.newSpace(spaceCount)),
+        onNewSpace: (newSpaceName) => dispatch(setActions.newSpace(newSpaceName)),
         onActiveSpaceChange: (newSpaceInd, newSpaceID) => (
             dispatch(mainActions.spaceChange(newSpaceInd, newSpaceID))),
-        onDeleteSpace: (deleteSpaceID, deleteSpacePosition) => (
+        onDeleteSpace: (deleteSpaceID) => (
             dispatch(setActions.deleteSpace(deleteSpaceID))
         )
     };

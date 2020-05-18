@@ -31,6 +31,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 newSpaceLoading: !state.newSpaceLoading
+            };
+        case actions.ACTIVE_SPACE_NULL:
+            return {
+                ...state,
+                activeSpaceID: null
             }
         default:
             return state;

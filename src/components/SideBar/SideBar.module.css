@@ -61,3 +61,38 @@
 .SideBar li:hover, .ActiveItem {
     background-color: rgba(10, 28, 50, 0.2);
 }
+
+.Input {
+    font-size: 16px;
+    outline: none;
+    padding: 8px;
+    font-family: 'Raleway', sans-serif;
+    height: 32px;
+    margin: 8px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid;
+    border-radius: 8px;
+}
+
+.Input::placeholder {
+    color: #CCCCCC;
+}
+
+.InputContainer {
+    text-align: center;
+}
+
+.InputButton {
+    background-color: transparent;
+    border: solid 2px white;
+    border-radius: 8px;
+    margin: 0 16px;
+    padding: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.InputButton:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
