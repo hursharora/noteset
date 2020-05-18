@@ -19,7 +19,8 @@ const ConfirmationModal = props => {
                         onClick={props.cancelDelete}>
                     <img src={CrossIcon} alt="Cancel"/>
                 </button>
-                <button className={classes.ConfirmationModalButton}>
+                <button className={classes.ConfirmationModalButton}
+                        onClick={() => props.continueDelete(props.spaceToDeleteID)}>
                     <img src={DoneIcon} alt="Continue"/>
                 </button>
             </div>
@@ -28,18 +29,20 @@ const ConfirmationModal = props => {
 };
 
 const mapStateToProps = state => {
-
+    return {
+        spaceToDeleteID: state.set.deletingSpace
+    }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        cancelDelete: () => dispatch (
+        cancelDelete: () => dispatch(
             setActions.deleteSpace(null, null)
         ),
-        continueDelete: () => dispatch (
-
+        continueDelete: (spaceID) => dispatch(
+            setActions.continueDeleteSpace(spaceID)
         )
     }
 }
 
-export default connect(null, mapDispatchToProps)(ConfirmationModal);
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmationModal);

@@ -45,3 +45,26 @@ export const deleteSpace = (spaceID) => {
         spaceID: spaceID
     }
 }
+
+export const continueDeleteSpaceLocal = spaceID => {
+    return {
+        type: actionTypes.DELETE_SPACE,
+        spaceID: spaceID
+    }
+}
+
+export const continueDeleteNotesLocal = spaceID => {
+    return {
+        type: actionTypes.DELETE_NOTES_SET,
+        spaceID: spaceID
+    }
+}
+
+export const continueDeleteSpace = (spaceID) => {
+    return dispatch => {
+        dispatch(continueDeleteSpaceLocal(spaceID));
+        dispatch(continueDeleteNotesLocal(spaceID));
+        axiosNotes.delete("/notespaces/" + spaceID + ".json")
+            .catch(e => console.log(e));
+    }
+}

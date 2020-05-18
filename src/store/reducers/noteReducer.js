@@ -1,7 +1,7 @@
 import * as actions from "../actions/actionTypes";
 
 const initialState = {
-    "noteset1": [
+    "noteset1": [ //placeholder note to show structure, gets overwritten on init
         {
             title: "My first note",
             content: "My first note content",
@@ -72,6 +72,10 @@ const reducer = (state = initialState, action) => {
             }
         case actions.INIT_NOTES:
             return action.notes;
+        case actions.DELETE_NOTES_SET:
+            const stateCopy = {...state};
+            delete stateCopy[action.spaceID];
+            return stateCopy;
         default:
             return state;
     }

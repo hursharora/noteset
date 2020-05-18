@@ -34,11 +34,17 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 spaces: action.spaces,
                 spaceCount: action.spaces.length
-            }
+            };
         case actions.TOGGLE_DELETING_SPACE:
             return {
                 ...state,
                 deletingSpace: action.spaceID
+            };
+        case actions.DELETE_SPACE:
+            return {
+                ...state,
+                spaces: state.spaces.filter(sp => sp.id !== action.spaceID),
+                deletingSpace: null
             }
         default:
             return state;
