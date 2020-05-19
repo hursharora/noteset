@@ -21,6 +21,7 @@
     color: white;
     transition: 0.3s ease;
     user-select: none;
+    word-wrap: break-word;
 }
 
 .NewSetButton {

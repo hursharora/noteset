@@ -35,6 +35,12 @@ class SideBar extends React.Component {
         this.setState({naming: false});
     }
 
+    confirmAddSpaceHandlerInput = event => {
+        if (event.keyCode === 13) {
+            this.confirmAddSpaceHandler();
+        }
+    }
+
     render() {
         let newSpace = (
             <button onClick={this.toggleNamingHandler}
@@ -51,8 +57,8 @@ class SideBar extends React.Component {
                            placeholder="New set name..."
                            onChange={this.inputChangeHandler}
                            className={classes.Input}
-                           maxLength={40}
-                           onSubmit={this.confirmAddSpaceHandler}/>
+                           maxLength={30}
+                           onKeyUp={this.confirmAddSpaceHandlerInput}/>
                     <button className={classes.InputButton}
                             onClick={this.confirmAddSpaceHandler}>
                         <img src={confirmAdd} alt="Add"/>

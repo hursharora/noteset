@@ -68,9 +68,9 @@ class Note extends Component {
         this.props.onTitleChange(event.target.value, this.props.belongsTo, this.props.id);
     }
 
-    onContentChangeLocal = event => {
-        //console.log(event.target.value);
-        this.props.onContentChange(event.target.value, this.props.belongsTo, this.props.id);
+    onContentChangeLocal = newText => {
+        //console.log(newText, "event listener");
+        this.props.onContentChange(newText, this.props.belongsTo, this.props.id);
     }
 
     render() {
