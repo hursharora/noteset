@@ -94,7 +94,9 @@ class Note extends Component {
                        onChange={this.onTitleChangeLocal}
                        value={this.props.title}/>
                 <NoteContentInput content={this.props.content}
-                                  contentChange={this.onContentChangeLocal}/>
+                                  contentChange={this.onContentChangeLocal}
+                                  noteID={this.props.id}
+                                  spaceID={this.props.belongsTo}/>
             </div>
         )
     }

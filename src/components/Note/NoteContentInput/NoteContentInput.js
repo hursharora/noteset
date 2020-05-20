@@ -2,17 +2,32 @@ import React, {Component} from 'react';
 import classes from "./NoteContentInput.module.css"
 import ContentEditable from "react-contenteditable";
 
+//Very proud of this component, easily the heart of the project.
+//Checkboxes are added, saved and loaded using clever string manipulation and
+//their statuses are saved to the normal content area!
+
 class NoteContentInput extends Component {
     state = {
-        content: "",
+        content: ""
     }
 
     checkboxes = [];
 
+    //Once mounted, the content string is searched for a 13 digit number (the ID of the checkbox)
+    //the found id's are added to the checkboxes array.
     componentDidMount() {
         this.setState({content: this.props.content})
+        const searchIDs = /\d{13}/g;
+        let retrievedIDs = this.props.content.match(searchIDs);
+        if (retrievedIDs != null) {
+            this.checkboxes = retrievedIDs.map(el => (
+                {id: el, listener: false}
+            ));
+        }
     }
 
+    //detects when the user has entered "task:" and replaces it with a checkbox,
+    //the new checkbox is added to the checkboxes array and all the content is saved to firebase/redux store
     contentUpdateHandler = event => {
         let newText = event.target.value;
         let replaced = false;
@@ -26,47 +41,61 @@ class NoteContentInput extends Component {
         this.props.contentChange(newText);
 
         if (replaced) {
-            //console.log(potentialID);
-            let newCheckBox = {id: potentialID, listener: false, checked: false};
-            this.checkboxes.push(newCheckBox);
+            let newCheckbox = {id: potentialID, listener: false};
+            this.checkboxes.push(newCheckbox);
         }
     }
 
+    //when a checkbox is clicked, the checked property is added to the check box in the content string
+    // and vice versa if it is already checked. Firebase/redux store are updated.
     checkBoxClickedHandler = (checkboxID) => {
         console.log("checked element", checkboxID);
-        this.checkboxes = this.checkboxes.map(el => {
-            if (el.id === checkboxID) {
-                return {
-                    ...el,
-                    checked: !el.checked
-                }
-            }
-            return el;
-        })
+        let replacingContent = this.state.content;
+
+        let testReplace = "id=\"input_" + checkboxID + "\" checked";
+        let toReplace = "id=\"input_" + checkboxID + "\"";
+        let replacement = toReplace + " checked";
+        if (replacingContent.search(testReplace) !== -1) { //if already checked
+            let t = toReplace;
+            toReplace = replacement;
+            replacement = t;
+        }
+
+        replacingContent = replacingContent.replace(toReplace, replacement);
+
+        this.setState({content: replacingContent});
+        this.props.contentChange(replacingContent);
     }
 
+    //maybe add in the future, deleted checkboxes will stay in checkbox array for now
+    // cleanRemovedCheckboxes = () => {
+    //     this.checkboxes = this.checkboxes.filter(el => {
+    //         if (document.body.contains(document.getElementById("input_" + el.id))) {
+    //             return true;
+    //         }
+    //         console.log("remove", el.id);
+    //         return false;
+    //     })
+    // }
 
     render() {
-        let toRemove = [];
-        this.checkboxes.forEach(el => {
-            let docSearch = document.getElementById("input_" + el.id);
-            if (docSearch != null && !el.listener) {
-                docSearch.addEventListener("change", () => this.checkBoxClickedHandler(el.id));
-                el.listener = true;
-            } else if (docSearch == null) {
-                toRemove.push(el.id);
-            }
-            if (docSearch != null && el.checked) {
-                docSearch.checked = true;
-            }
-        })
-
-        //if a checkbox id is not found on the dom, remove it from the list of checkboxes
-        if (toRemove.length) {
-            this.checkboxes = this.checkboxes.filter(el => !toRemove.includes(el.id));
+        //click listeners are added to the checkboxes once they are rendered.
+        if (this.checkboxes) {
+            this.checkboxes.forEach(el => {
+                let docSearch = document.getElementById("input_" + el.id);
+                if (docSearch != null && !el.listener) {
+                    console.log("found", el.id);
+                    docSearch.addEventListener("change", () => this.checkBoxClickedHandler(el.id));
+                    el.listener = true;
+                    //this.cleanRemovedCheckboxes();
+                }
+            })
         }
 
         //console.log(this.state.content, "inner");
+        //a content editable div is used to render the html
+        //making your own content editable div has TONS of problems, luckily I was able to
+        //use this content editable div library.
         return (
             <ContentEditable
                 data-placeholder={"Write your notes here..."}
