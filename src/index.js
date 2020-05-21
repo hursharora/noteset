@@ -9,6 +9,7 @@ import setReducer from "./store/reducers/setReducer";
 import {Provider} from "react-redux";
 import mainReducer from "./store/reducers/mainReducer";
 import noteReducer from "./store/reducers/noteReducer";
+import {BrowserRouter} from "react-router-dom";
 
 
 const rootReducer = combineReducers({
@@ -26,9 +27,11 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
+        <BrowserRouter>
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        </BrowserRouter>
     </Provider>,
   document.getElementById('root')
 );

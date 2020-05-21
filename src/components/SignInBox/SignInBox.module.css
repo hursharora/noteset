@@ -1,0 +1,72 @@
+.SignInBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 450px;
+    background-color: rgba(69, 123, 157, 0.6);
+    border-radius: 12px;
+}
+
+.SignInBox input {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    color: white;
+    outline: none;
+    padding: 8px;
+    height: 50px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    width: 300px;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.SignInBox p {
+    font-family: 'Raleway', sans-serif;
+    display: inline;
+    color: white;
+}
+
+.SignInBox h2 {
+    margin-top: 0;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 2em;
+}
+
+.SubmitButton {
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: solid 2px white;
+    color: white;
+    border-radius: 8px;
+    padding: 16px;
+    transition: 0.3s ease;
+    margin-bottom: 32px;
+}
+
+.SubmitButton:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.SwitchButton {
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: solid 2px white;
+    color: white;
+    border-radius: 8px;
+    padding: 4px;
+    transition: 0.3s ease;
+    margin-bottom: 32px;
+}
+
+.SwitchButton:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}

@@ -49,7 +49,7 @@ class NoteContentInput extends Component {
     //when a checkbox is clicked, the checked property is added to the check box in the content string
     // and vice versa if it is already checked. Firebase/redux store are updated.
     checkBoxClickedHandler = (checkboxID) => {
-        console.log("checked element", checkboxID);
+        //console.log("checked element", checkboxID);
         let replacingContent = this.state.content;
 
         let testReplace = "id=\"input_" + checkboxID + "\" checked";
@@ -84,7 +84,7 @@ class NoteContentInput extends Component {
             this.checkboxes.forEach(el => {
                 let docSearch = document.getElementById("input_" + el.id);
                 if (docSearch != null && !el.listener) {
-                    console.log("found", el.id);
+                    //console.log("found", el.id);
                     docSearch.addEventListener("change", () => this.checkBoxClickedHandler(el.id));
                     el.listener = true;
                     //this.cleanRemovedCheckboxes();
