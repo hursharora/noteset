@@ -9,6 +9,7 @@
     border-radius: 8px;
     position: absolute;
     z-index: 0;
+    transition: 0.3s ease-out box-shadow;
 }
 
 .NoteContainer:hover {

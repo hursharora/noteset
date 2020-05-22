@@ -20,7 +20,7 @@ const ConfirmationModal = props => {
                     <img src={CrossIcon} alt="Cancel"/>
                 </button>
                 <button className={classes.ConfirmationModalButton}
-                        onClick={() => props.continueDelete(props.spaceToDeleteID)}>
+                        onClick={() => props.continueDelete(props.spaceToDeleteID, props.uid, props.token)}>
                     <img src={DoneIcon} alt="Continue"/>
                 </button>
             </div>
@@ -30,7 +30,9 @@ const ConfirmationModal = props => {
 
 const mapStateToProps = state => {
     return {
-        spaceToDeleteID: state.set.deletingSpace
+        spaceToDeleteID: state.set.deletingSpace,
+        uid: state.main.uid,
+        token: state.main.authToken
     }
 }
 
@@ -39,8 +41,8 @@ const mapDispatchToProps = dispatch => {
         cancelDelete: () => dispatch(
             setActions.deleteSpace(null, null)
         ),
-        continueDelete: (spaceID) => dispatch(
-            setActions.continueDeleteSpace(spaceID)
+        continueDelete: (spaceID, uid, token) => dispatch(
+            setActions.continueDeleteSpace(spaceID, uid, token)
         )
     }
 }

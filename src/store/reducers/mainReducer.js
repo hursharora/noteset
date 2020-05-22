@@ -6,7 +6,10 @@ const initialState = {
     newNoteLoading: false,
     newSpaceLoading: false,
     activeSpaceID: null,
-    auth: null //replace with auth token once logged in?
+    authToken: null,
+    authError: null,
+    uid: null,
+    authLoading: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -36,7 +39,32 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 activeSpaceID: null
+            };
+        case actions.AUTH_SUCCESS:
+            return {
+                ...state,
+                authToken: action.token,
+                uid: action.uid,
+                authLoading: false
+            };
+        case actions.AUTH_START:
+            return {
+                ...state,
+                authLoading: true
+            };
+        case actions.AUTH_FAIL:
+            return {
+                ...state,
+                authLoading: false,
+                authError: action.error
             }
+        case actions.LOGOUT:
+            return {
+                ...state,
+                authError: null,
+                authToken: null,
+                uid: null
+            };
         default:
             return state;
     }

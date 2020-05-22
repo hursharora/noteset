@@ -11,10 +11,12 @@ export const updatePositionLocal = (newX, newY, belongsTo, toUpdateID) => {
     }
 }
 
-export const updatePosition = (newX, newY, belongsTo, toUpdateID) => {
+export const updatePosition = (newX, newY, belongsTo, toUpdateID, uid, token) => {
     return dispatch => {
+        let urlPref = "users/" + uid;
+        let urlSuf = ".json?auth=" + token;
         dispatch(updatePositionLocal(newX, newY, belongsTo, toUpdateID));
-        let requestString = "/notespaces/" + belongsTo + "/notes/" + toUpdateID + ".json";
+        let requestString = urlPref + "/notespaces/" + belongsTo + "/notes/" + toUpdateID + urlSuf;
         axiosNotes.patch(requestString, {xPos: newX, yPos: newY})
             .catch(e => console.log(e));
     }
@@ -29,10 +31,12 @@ export const updateTitleLocal = (newTitle, belongsTo, toUpdateID) => {
     }
 }
 
-export const updateTitle = (newTitle, belongsTo, toUpdateID) => {
+export const updateTitle = (newTitle, belongsTo, toUpdateID, uid, token) => {
     return dispatch => {
         dispatch(updateTitleLocal(newTitle, belongsTo, toUpdateID));
-        let requestString = "/notespaces/" + belongsTo + "/notes/" + toUpdateID + ".json";
+        let urlPref = "users/" + uid;
+        let urlSuf = ".json?auth=" + token;
+        let requestString = urlPref + "/notespaces/" + belongsTo + "/notes/" + toUpdateID + urlSuf;
         axiosNotes.patch(requestString, {title: newTitle})
             .catch(e => console.log(e));
     }
@@ -47,10 +51,12 @@ export const updateContentLocal = (newContent, belongsTo, toUpdateID) => {
     }
 }
 
-export const updateContent = (newContent, belongsTo, toUpdateID) => {
+export const updateContent = (newContent, belongsTo, toUpdateID, uid, token) => {
     return dispatch => {
         dispatch(updateContentLocal(newContent, belongsTo, toUpdateID));
-        let requestString = "/notespaces/" + belongsTo + "/notes/" + toUpdateID + ".json";
+        let urlPref = "users/" + uid;
+        let urlSuf = ".json?auth=" + token;
+        let requestString = urlPref + "/notespaces/" + belongsTo + "/notes/" + toUpdateID + urlSuf;
         axiosNotes.patch(requestString, {content: newContent})
             .catch(e => console.log(e));
     }
@@ -77,7 +83,7 @@ export const newNoteLocal = activeSpaceID => {
     }
 }
 
-export const newNote = (activeSpaceID) => {
+export const newNote = (activeSpaceID, uid, token) => {
     return dispatch => {
         dispatch(toggleNewNoteLoading());
         dispatch(newNoteLocal(activeSpaceID)); //disable new note button here
@@ -87,11 +93,13 @@ export const newNote = (activeSpaceID) => {
             xPos: "0px",
             yPos: "0px"
         }
-        axiosNotes.post("/notespaces/" + activeSpaceID + "/notes.json", newNote)
+        let urlPref = "users/" + uid;
+        let urlSuf = ".json?auth=" + token;
+        axiosNotes.post(urlPref + "/notespaces/" + activeSpaceID + "/notes" + urlSuf, newNote)
             .then(r => {
                 dispatch(updateNoteID(activeSpaceID, r.data.name)); //enable new note button
                 dispatch(toggleNewNoteLoading());
-                axiosNotes.patch("/notespaces/" + activeSpaceID + "/notes/" + r.data.name + ".json",
+                axiosNotes.patch(urlPref + "/notespaces/" + activeSpaceID + "/notes/" + r.data.name + urlSuf,
                     {id: r.data.name})
                     .catch(e => console.log(e));
             });
@@ -106,10 +114,12 @@ export const deleteNoteLocal = (spaceID, noteID) => {
     }
 }
 
-export const deleteNote = (spaceID, noteID) => {
+export const deleteNote = (spaceID, noteID, uid, token) => {
     return dispatch => {
+        let urlPref = "users/" + uid;
+        let urlSuf = ".json?auth=" + token;
         dispatch(deleteNoteLocal(spaceID, noteID));
-        axiosNotes.delete("/notespaces/" + spaceID + "/notes/" + noteID + ".json")
+        axiosNotes.delete(urlPref + "/notespaces/" + spaceID + "/notes/" + noteID + urlSuf)
             .catch(e => console.log(e));
     }
 }

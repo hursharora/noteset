@@ -59,28 +59,26 @@ class Note extends Component {
     mouseUpHandler = () => {
         //console.log("mouseup");
         const element = document.getElementById("note" + this.props.id);
-        this.props.onUpdatePosition(element.style.left, element.style.top, this.props.belongsTo, this.props.id);
+        this.props.onUpdatePosition(element.style.left, element.style.top, this.props.belongsTo, this.props.id, this.props.uid, this.props.token);
         document.removeEventListener("mousemove", this.mouseMoveHandler);
         document.removeEventListener("mouseup", this.mouseUpHandler);
     }
 
     onTitleChangeLocal = event => {
-        this.props.onTitleChange(event.target.value, this.props.belongsTo, this.props.id);
+        this.props.onTitleChange(event.target.value, this.props.belongsTo, this.props.id, this.props.uid, this.props.token);
     }
 
     onContentChangeLocal = newText => {
-        //console.log(newText, "event listener");
-        this.props.onContentChange(newText, this.props.belongsTo, this.props.id);
+        this.props.onContentChange(newText, this.props.belongsTo, this.props.id, this.props.uid, this.props.token);
     }
 
     render() {
-
         return (
             <div className={classes.NoteContainer}
                  id={"note" + this.props.id} style={{left: this.props.xPos, top: this.props.yPos}}>
                 <div className={classes.ActionsContainer}>
                     <button className={classes.CloseButton}
-                            onClick={() => this.props.onDeleteNote(this.props.belongsTo, this.props.id)}>
+                            onClick={() => this.props.onDeleteNote(this.props.belongsTo, this.props.id, this.props.uid, this.props.token)}>
                         <img src={closeIcon} alt="Close"/>
                     </button>
                     <div className={classes.Drag} onMouseDown={this.mouseDownHandler}>
@@ -104,16 +102,23 @@ class Note extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUpdatePosition: (newX, newY, belongsTo, toUpdateID) => (
-            dispatch(noteActions.updatePosition(newX, newY, belongsTo, toUpdateID))),
-        onTitleChange: (newTitle, belongsTo, toUpdateID) => (
-            dispatch(noteActions.updateTitle(newTitle, belongsTo, toUpdateID))),
-        onContentChange: (newContent, belongsTo, toUpdateID) => (
-            dispatch(noteActions.updateContent(newContent, belongsTo, toUpdateID))),
-        onDeleteNote: (spaceID, noteID) => (
-            dispatch(noteActions.deleteNote(spaceID, noteID)))
+        onUpdatePosition: (newX, newY, belongsTo, toUpdateID, uid, token) => (
+            dispatch(noteActions.updatePosition(newX, newY, belongsTo, toUpdateID, uid, token))),
+        onTitleChange: (newTitle, belongsTo, toUpdateID, uid, token) => (
+            dispatch(noteActions.updateTitle(newTitle, belongsTo, toUpdateID, uid, token))),
+        onContentChange: (newContent, belongsTo, toUpdateID, uid, token) => (
+            dispatch(noteActions.updateContent(newContent, belongsTo, toUpdateID, uid, token))),
+        onDeleteNote: (spaceID, noteID, uid, token) => (
+            dispatch(noteActions.deleteNote(spaceID, noteID, uid, token)))
 
     }
 }
 
-export default connect(null, mapDispatchToProps)(Note);
+const mapStateToProps = state => {
+    return {
+        uid: state.main.uid,
+        token: state.main.authToken
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Note);

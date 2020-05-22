@@ -1,25 +1,52 @@
 import React from 'react';
 import MainContainer from "./page-containers/MainContainer/MainContainer";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 import Authentication from "./page-containers/Authentication/Authentication";
-//sidebar to create new noteset/notespace
-//free form notes that can be linked!?
-// -auto align notes
-//task: to add checkbox
-//drag note to corner for delete
-//disable new set button while loading!
+import {connect} from "react-redux";
+import * as mainActions from "./store/actions/mainActions";
+
+//notelinks?
 
 class App extends React.Component {
+    componentDidMount() {
+        this.props.authInit();
+    }
+
+
     render() {
+        let loggedInRoutes = (
+            <>
+                <Route path={"/"} exact component={MainContainer}/>
+                <Redirect to={"/"}/>
+            </>)
+
+        let authRoutes = (
+            <>
+                <Route path={"/signin"} exact component={Authentication}/>
+                <Redirect to={"/signin"}/>
+            </>
+        )
+
         return (
             <div>
                 <Switch>
-                    <Route path={"/signin"} component={Authentication}/>
-                    <Route path={"/"} component={MainContainer}/>
+                    {this.props.loggedIn ? loggedInRoutes : authRoutes}
                 </Switch>
             </div>
         );
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.main.authToken !== null
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        authInit: () => dispatch(mainActions.authInit())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

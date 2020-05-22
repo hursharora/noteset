@@ -31,7 +31,7 @@ class SideBar extends React.Component {
     }
 
     confirmAddSpaceHandler = event => {
-        this.props.onNewSpace(this.state.name);
+        this.props.onNewSpace(this.state.name, this.props.uid, this.props.token);
         this.setState({naming: false});
     }
 
@@ -102,13 +102,15 @@ const mapStateToProps = state => {
         spaces: state.set.spaces,
         spaceCount: state.set.spaceCount,
         activePosition: state.main.activeSpacePosition,
-        newSpaceDisabled: state.main.newSpaceLoading
+        newSpaceDisabled: state.main.newSpaceLoading,
+        uid: state.main.uid,
+        token: state.main.authToken
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onNewSpace: (newSpaceName) => dispatch(setActions.newSpace(newSpaceName)),
+        onNewSpace: (newSpaceName, uid, token) => dispatch(setActions.newSpace(newSpaceName, uid, token)),
         onActiveSpaceChange: (newSpaceInd, newSpaceID) => (
             dispatch(mainActions.spaceChange(newSpaceInd, newSpaceID))),
         onDeleteSpace: (deleteSpaceID) => (

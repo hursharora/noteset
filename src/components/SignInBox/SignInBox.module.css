@@ -9,7 +9,7 @@
     border-radius: 12px;
 }
 
-.SignInBox input {
+.SignInBoxInput, .SignInBoxInputInvalid {
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     color: white;
@@ -24,6 +24,10 @@
     border-radius: 8px;
     border: none;
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.SignInBoxInputInvalid {
+    border: 1px solid #c70606;
 }
 
 .SignInBox p {
@@ -51,6 +55,11 @@
     margin-bottom: 32px;
 }
 
+.SubmitButton:disabled {
+    color: grey;
+    border-color: grey;
+}
+
 .SubmitButton:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
@@ -69,4 +78,8 @@
 
 .SwitchButton:hover {
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.InvalidInput {
+    border: 1px solid red;
 }

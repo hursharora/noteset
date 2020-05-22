@@ -17,7 +17,7 @@
     font-family: 'Raleway', sans-serif;
 }
 
-.NewNote {
+.NewNote, .LogoutButton {
     font-family: 'Raleway', sans-serif;
     padding: 6px;
     margin-right: auto;
@@ -29,7 +29,7 @@
     transition: 0.3s ease;
 }
 
-.NewNote:hover {
+.NewNote:hover, .LogoutButton.hover {
     background-color: rgba(10, 28, 50, 0.4);
 }
 
@@ -41,4 +41,8 @@
 .Placeholder {
     margin-left: auto;
     margin-right: auto;
+}
+
+.LogoutButton {
+    margin-right: 16px;
 }

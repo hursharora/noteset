@@ -22,18 +22,20 @@ export const toggleNewSpaceLoading = () => {
     }
 }
 
-export const newSpace = (newSpaceName) => {
+export const newSpace = (newSpaceName, uid, token) => {
     return dispatch => {
         dispatch(toggleNewSpaceLoading());
         dispatch(newSpaceLocal(newSpaceName)); //disable new space button here
         const newSpace = {
             name: newSpaceName
         }
-        axiosNotes.post("/notespaces.json", newSpace)
+        let urlPref = "/users/" + uid;
+        let urlSuf = ".json?auth=" + token;
+        axiosNotes.post(urlPref + "/notespaces" + urlSuf, newSpace)
             .then(r => {
                 dispatch(updateSetID(r.data.name)); //enable it here
                 dispatch(toggleNewSpaceLoading());
-                axiosNotes.patch("/notespaces/" + r.data.name + ".json", {id: r.data.name})
+                axiosNotes.patch(urlPref + "/notespaces/" + r.data.name + urlSuf, {id: r.data.name})
                     .catch(e => console.log(e));
             });
     }
@@ -66,12 +68,14 @@ export const setActiveSpaceNull = () => {
     }
 }
 
-export const continueDeleteSpace = (spaceID) => {
+export const continueDeleteSpace = (spaceID, uid, token) => {
     return dispatch => {
         dispatch(continueDeleteSpaceLocal(spaceID));
         dispatch(continueDeleteNotesLocal(spaceID));
         dispatch(setActiveSpaceNull());
-        axiosNotes.delete("/notespaces/" + spaceID + ".json")
+        let urlPref = "/users/" + uid;
+        let urlSuf = ".json?auth=" + token;
+        axiosNotes.delete(urlPref + "/notespaces/" + spaceID + urlSuf)
             .catch(e => console.log(e));
     }
 }

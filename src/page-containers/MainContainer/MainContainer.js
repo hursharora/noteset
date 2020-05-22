@@ -10,7 +10,7 @@ import ConfirmationModal from "../../components/ConfirmationModal/ConfirmationMo
 
 class MainContainer extends React.Component {
     componentDidMount() {
-        this.props.initLoad();
+        this.props.initLoad(this.props.uid, this.props.token);
     }
 
     render() {
@@ -37,14 +37,16 @@ class MainContainer extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        initLoad: () => dispatch(mainActions.intiLoad())
+        initLoad: (uid, authToken) => dispatch(mainActions.initLoad(uid, authToken))
     }
 }
 
 const mapStateToProps = state => {
     return {
         loading: state.main.initLoading,
-        deletingSpace: state.set.deletingSpace
+        deletingSpace: state.set.deletingSpace,
+        uid: state.main.uid,
+        token: state.main.authToken
     }
 }
 

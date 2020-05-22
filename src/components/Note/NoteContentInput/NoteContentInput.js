@@ -3,8 +3,7 @@ import classes from "./NoteContentInput.module.css"
 import ContentEditable from "react-contenteditable";
 
 //Very proud of this component, easily the heart of the project.
-//Checkboxes are added, saved and loaded using clever string manipulation and
-//their statuses are saved to the normal content area!
+//Checkboxes are added and checked using clever string manipulation
 
 class NoteContentInput extends Component {
     state = {
@@ -12,8 +11,6 @@ class NoteContentInput extends Component {
     }
 
 
-    //Once mounted, the content string is searched for a 13 digit number (the ID of the checkbox)
-    //the found id's are added to the checkboxes array.
     componentDidMount() {
         this.setState({content: this.props.content})
     }
@@ -38,11 +35,11 @@ class NoteContentInput extends Component {
             let toReplace;
             let replacement;
             if (event.target.checked) {
-                console.log("checked", event.target.id);
+                //console.log("checked", event.target.id);
                 toReplace = "id=\"" + checkboxID + "\"";
                 replacement = toReplace + " checked";
             } else {
-                console.log("unchecked", event.target.id);
+                //console.log("unchecked", event.target.id);
                 toReplace = "id=\"" + checkboxID + "\" checked";
                 replacement = "id=\"" + checkboxID + "\"";
             }
