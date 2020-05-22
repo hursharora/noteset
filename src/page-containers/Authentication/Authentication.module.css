@@ -10,8 +10,13 @@
 }
 
 .Title {
-    margin-top: 0;
+    margin: 0;
     font-family: 'Raleway', sans-serif;
     color: white;
     font-size: 4em;
+}
+
+.SubHeading {
+    margin-top: 0;
+    color: white;
 }

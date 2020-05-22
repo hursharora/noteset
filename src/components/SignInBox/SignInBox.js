@@ -81,12 +81,32 @@ class SignInBox extends Component {
     }
 
     render() {
+        let headingCreate = <h2 className={classes.SignInBoxHeader}>Create an account</h2>;
+        let headingSignIn = <h2 className={classes.SignInBoxHeader}>Sign in</h2>;
+        if (this.props.error) {
+            switch (this.props.error.message) {
+                case "EMAIL_NOT_FOUND":
+                    headingSignIn = <h2 className={classes.SignInBoxHeaderInvalid}>Invalid email or password</h2>;
+                    break;
+                case "INVALID_PASSWORD":
+                    headingSignIn = <h2 className={classes.SignInBoxHeaderInvalid}>Invalid email or password</h2>;
+                    break;
+                case "EMAIL_EXISTS":
+                    headingCreate = <h2 className={classes.SignInBoxHeaderInvalid}>Email already registered</h2>;
+                    break;
+                default:
+                    headingCreate = <h2 className={classes.SignInBoxHeaderInvalid}>{this.props.error.message}</h2>;
+                    headingSignIn = <h2 className={classes.SignInBoxHeaderInvalid}>{this.props.error.message}</h2>;
+            }
+        }
+
+
         let allValid = (this.state.fields.email.valid &&
             this.state.fields.password.valid && this.state.fields.confirmPassword.valid);
         let form = (
             <>
                 <form onSubmit={this.submitHandler}>
-                    <h2>Create an account</h2>
+                    {headingCreate}
                     <input type="email"
                            placeholder="Email Address"
                            onChange={(event) => this.inputChangeHandler(event, "email")}
@@ -117,7 +137,7 @@ class SignInBox extends Component {
             form = (
                 <>
                     <form onSubmit={this.submitHandler}>
-                        <h2>Sign in</h2>
+                        {headingSignIn}
                         <input type="email"
                                placeholder="Email Address"
                                className={classes.SignInBoxInput}
@@ -150,7 +170,8 @@ class SignInBox extends Component {
 
 const mapStateToProps = state => {
     return {
-        loading: state.main.authLoading
+        loading: state.main.authLoading,
+        error: state.main.authError
     }
 }
 

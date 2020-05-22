@@ -45,6 +45,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 spaces: state.spaces.filter(sp => sp.id !== action.spaceID),
                 deletingSpace: null
+            };
+        case actions.CLEAR_SETS:
+            return {
+                spaces: [],
+                spaceCount: 0,
+                deletingSpace: null
             }
         default:
             return state;

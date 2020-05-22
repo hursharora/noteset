@@ -80,7 +80,9 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 [action.spaceID]: state[action.spaceID].filter(el => el.id !== action.noteID)
-            }
+            };
+        case actions.CLEAR_NOTES:
+            return {};
         default:
             return state;
     }

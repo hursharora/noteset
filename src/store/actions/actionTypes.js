@@ -3,6 +3,7 @@ export const NEW_SPACE = "NEW_SPACE";
 export const UPDATE_SET_ID = "UPDATE_SET_ID";
 export const TOGGLE_DELETING_SPACE = "TOGGLE_DELETING_SPACE";
 export const DELETE_SPACE = "DELETE_SPACE";
+export const CLEAR_SETS= "CLEAR_SETS";
 
 //main reducer
 export const SPACE_CHANGE = "SPACE_CHANGE";
@@ -25,3 +26,4 @@ export const NEW_NOTE = "NEW_NOTE";
 export const UPDATE_NOTE_ID = "UPDATE_NOTE_ID";
 export const DELETE_NOTES_SET = "DELETE_NOTES_SET";
 export const DELETE_NOTE = "DELETE_NOTE";
+export const CLEAR_NOTES = "CLEAR_NOTES";

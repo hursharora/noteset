@@ -63,7 +63,9 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 authError: null,
                 authToken: null,
-                uid: null
+                uid: null,
+                activeSpaceID: null,
+                activeSpacePosition: 0
             };
         default:
             return state;

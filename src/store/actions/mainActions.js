@@ -84,7 +84,7 @@ export const authenticate = (email, password, signIn) => {
                 dispatch(setAuthTimeout(r.data.expiresIn));
             })
             .catch(e => {
-                console.log(e.response.data.error);
+                //console.log(e.response.data.error);
                 dispatch(authFail(e.response.data.error));
             });
     }
@@ -125,9 +125,11 @@ export const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
     localStorage.removeItem("userId")
-    return {
-        type: actionTypes.LOGOUT
-    };
+    return dispatch => {
+        dispatch({type: actionTypes.LOGOUT});
+        dispatch({type: actionTypes.CLEAR_NOTES});
+        dispatch({type: actionTypes.CLEAR_SETS});
+    }
 };
 
 //if auth token is found on local storage, auto log in

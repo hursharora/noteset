@@ -36,11 +36,16 @@
     color: white;
 }
 
-.SignInBox h2 {
+.SignInBoxHeader, .SignInBoxHeaderInvalid {
     margin-top: 0;
     color: white;
     font-family: 'Raleway', sans-serif;
     font-size: 2em;
+}
+
+.SignInBoxHeaderInvalid {
+    color: #b30303;
+    font-size: 1.3em;
 }
 
 .SubmitButton {
