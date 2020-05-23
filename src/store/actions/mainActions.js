@@ -1,7 +1,16 @@
 import * as actionTypes from "./actionTypes";
 import axiosNotes from "../../axiosNotes";
+import * as setActions from "./setActions";
+import * as noteActions from "./noteActions";
 
-export const spaceChange = (newSpaceInd, newSpaceID) => {
+const tutorialNote = "Tutorial<div><input type=\"checkbox\" " +
+    "id=\"input_1590124768642\">&nbsp;Try dragging notes around by grabbing them from the top-right corner</div><div><br>" +
+    "</div><div><input type=\"checkbox\" id=\"input_1590124817818\">&nbsp;Try creating tasks by typing task followed by a :</div><div><br>" +
+    "</div><div><input type=\"checkbox\" id=\"input_1590124853476\">&nbsp;Create a new set by pressing the add button on the sidebar</div><div><br>" +
+    "</div><div>Everything is automatically saved!</div><div><br></div><div>Thank you for checking out NoteSet!<br></div><div>";
+
+
+export const spaceChange = (newSpaceInd = -1, newSpaceID) => {
     return {
         type: actionTypes.SPACE_CHANGE,
         newInd: newSpaceInd,
@@ -44,16 +53,29 @@ export const doneLoading = () => {
     }
 }
 
+
 export const initLoad = (uid, token) => {
     let urlPref = "users/" + uid;
     let urlSuf = "?auth=" + token;
-    return dispatch => {
+    return (dispatch, getState) => {
+        console.log(getState().main);
         axiosNotes.get(urlPref + "/notespaces.json" + urlSuf)
             .then(r => {
-                dispatch(initSpaces(r.data));
-                dispatch(initNotes(r.data));
-                dispatch(doneLoading());
+                if (r.data === null) {
+                    let initTitle = "Welcome to NoteSet!";
+                    let initContent = tutorialNote;
+                    dispatch(setActions.newSpace("My first noteset", uid, token));
+                    console.log("first run");
+                    setTimeout(() => {
+                        dispatch(noteActions.newNote(getState().set.spaces[0].id, uid, token, initContent, initTitle))
+                        dispatch(doneLoading())},2000)
+                } else {
+                    dispatch(initSpaces(r.data));
+                    dispatch(initNotes(r.data));
+                    dispatch(doneLoading());
+                }
             })
+            .catch(e => console.log(e));
     }
 }
 

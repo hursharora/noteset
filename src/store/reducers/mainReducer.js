@@ -61,6 +61,7 @@ const reducer = (state = initialState, action) => {
         case actions.LOGOUT:
             return {
                 ...state,
+                initLoading: true,
                 authError: null,
                 authToken: null,
                 uid: null,

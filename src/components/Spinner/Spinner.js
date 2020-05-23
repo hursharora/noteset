@@ -1,9 +1,13 @@
 import React from "react";
 import classes from "./Spinner.module.css"
 
-const Spinner = () => {
+const Spinner = props => {
+    let usedClasses = [classes.Loader];
+    if (props.main) {
+        usedClasses.push(classes.MainSpinner);
+    }
     return (
-        <div className={classes.Loader}>Loading...</div>
+        <div className={usedClasses.join(" ")}>Loading...</div>
     )
 }
 

@@ -51,14 +51,7 @@ const reducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                [action.activeSpaceID]: noteSpace.concat(
-                    {
-                        title: "",
-                        content: "",
-                        id: "temp",
-                        xPos: "0px",
-                        yPos: "0px"
-                    })
+                [action.activeSpaceID]: noteSpace.concat(action.note)
             }
         case actions.UPDATE_NOTE_ID:
             return {

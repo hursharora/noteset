@@ -19,6 +19,11 @@
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
 }
+
+.MainSpinner {
+    margin-left: 50%;
+    margin-top: 20%;
+}
 .Loader:before,
 .Loader:after {
     position: absolute;

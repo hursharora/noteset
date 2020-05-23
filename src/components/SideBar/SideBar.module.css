@@ -4,6 +4,7 @@
     background-color: rgba(69, 123, 157, 0.6);
     height: 100%;
     width: 300px;
+    overflow: auto;
 }
 
 .SideBar ul {

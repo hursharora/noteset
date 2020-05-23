@@ -14,7 +14,7 @@ class MainContainer extends React.Component {
     }
 
     render() {
-        let content = <Spinner/>
+        let content = <Spinner main/>
         if (!this.props.loading) {
             content = (
                 <>

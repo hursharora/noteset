@@ -5,22 +5,19 @@
     background: #1a2f4e;
     z-index: 500;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .TitleText {
     color: White;
     cursor: default;
     user-select: none;
-    margin-right: auto;
-    transform: translateX(50%);
     font-family: 'Raleway', sans-serif;
 }
 
 .NewNote, .LogoutButton {
     font-family: 'Raleway', sans-serif;
     padding: 6px;
-    margin-right: auto;
     background-color: transparent;
     color: white;
     border-radius: 5px;
@@ -38,11 +35,6 @@
     border-color:#444444;
 }
 
-.Placeholder {
-    margin-left: auto;
-    margin-right: auto;
-}
 
 .LogoutButton {
-    margin-right: 16px;
 }

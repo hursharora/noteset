@@ -7,11 +7,10 @@ import {connect} from "react-redux";
 const TopBar = props => {
     return (
         <nav className={classes.TopBar}>
-            <div className={classes.Placeholder}/>
-            <h2 className={classes.TitleText}>NoteSet</h2>
             <button className={classes.NewNote}
                     disabled={props.newNoteDisabled || !props.currActiveSpace}
                     onClick={() => props.onNewNote(props.currActiveSpace, props.uid, props.token)}>New Note</button>
+            <h2 className={classes.TitleText}>NoteSet</h2>
             <button className={classes.LogoutButton} onClick={props.logout}>Logout</button>
         </nav>
     );

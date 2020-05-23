@@ -76,23 +76,26 @@ export const toggleNewNoteLoading = () => {
     }
 }
 
-export const newNoteLocal = activeSpaceID => {
+export const newNoteLocal = (activeSpaceID, note) => {
     return {
         type: actionTypes.NEW_NOTE,
-        activeSpaceID: activeSpaceID
+        activeSpaceID: activeSpaceID,
+        note: note
     }
 }
 
-export const newNote = (activeSpaceID, uid, token) => {
+export const newNote = (activeSpaceID, uid, token, content = "", title = "") => {
     return dispatch => {
         dispatch(toggleNewNoteLoading());
-        dispatch(newNoteLocal(activeSpaceID)); //disable new note button here
         const newNote = {
-            title: "",
-            content: "",
+            title: title,
+            content: content,
             xPos: "0px",
-            yPos: "0px"
+            yPos: "0px",
+            id: "temp"
         }
+        dispatch(newNoteLocal(activeSpaceID, newNote)); //disable new note button here
+
         let urlPref = "users/" + uid;
         let urlSuf = ".json?auth=" + token;
         axiosNotes.post(urlPref + "/notespaces/" + activeSpaceID + "/notes" + urlSuf, newNote)
